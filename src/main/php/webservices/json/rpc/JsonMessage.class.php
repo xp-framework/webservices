@@ -1,176 +1,170 @@
-<?php
-/* This class is part of the XP framework
- *
- * $Id$ 
- */
+<?php namespace webservices\json\rpc;
 
-  uses(
-    'scriptlet.rpc.AbstractRpcMessage',
-    'webservices.json.JsonFactory'
-  );
+use scriptlet\rpc\AbstractRpcMessage;
+use webservices\json\JsonFactory;
+
+
+/**
+ * Json Message
+ *
+ * @see       http://json-rpc.org/wiki/specification
+ * @purpose   Contains the Json message
+ */
+class JsonMessage extends \lang\Object implements AbstractRpcMessage {
+  public
+    $method   = '',
+    $id       = '',
+    $encoding = 'utf-8',
+    $data     = null,
+    $class    = '';
 
   /**
-   * Json Message
+   * Create message from string representation
    *
-   * @see       http://json-rpc.org/wiki/specification
-   * @purpose   Contains the Json message
+   * @param   string string
+   * @return  webservices.json.rpc.JsonMessage
    */
-  class JsonMessage extends Object implements AbstractRpcMessage {
-    public
-      $method   = '',
-      $id       = '',
-      $encoding = 'utf-8',
-      $data     = NULL,
-      $class    = '';
+  public static function fromString($string) { }
+  
+  /**
+   * Create message 
+   *
+   * @param   webservices.json.rpc.JsonMessage msg
+   */
+  public function create() { }
+  
+  /**
+   * Retrieve content type for request
+   *
+   * @return  string
+   */
+  public function getContentType() {
+    return 'application/json';
+  }    
 
-    /**
-     * Create message from string representation
-     *
-     * @param   string string
-     * @return  webservices.json.rpc.JsonMessage
-     */
-    public static function fromString($string) { }
-    
-    /**
-     * Create message 
-     *
-     * @param   webservices.json.rpc.JsonMessage msg
-     */
-    public function create() { }
-    
-    /**
-     * Retrieve content type for request
-     *
-     * @return  string
-     */
-    public function getContentType() {
-      return 'application/json';
-    }    
+  /**
+   * Set Method
+   *
+   * @param   string method
+   */
+  public function setMethod($method) {
+    $this->method= $method;
+  }
 
-    /**
-     * Set Method
-     *
-     * @param   string method
-     */
-    public function setMethod($method) {
-      $this->method= $method;
-    }
+  /**
+   * Get Method
+   *
+   * @return  string
+   */
+  public function getMethod() {
+    return $this->method;
+  }
 
-    /**
-     * Get Method
-     *
-     * @return  string
-     */
-    public function getMethod() {
-      return $this->method;
-    }
+  /**
+   * Set Encoding
+   *
+   * @param   string encoding
+   */
+  public function setEncoding($encoding) {
+    $this->encoding= $encoding;
+  }
 
-    /**
-     * Set Encoding
-     *
-     * @param   string encoding
-     */
-    public function setEncoding($encoding) {
-      $this->encoding= $encoding;
-    }
+  /**
+   * Get Encoding
+   *
+   * @return  string
+   */
+  public function getEncoding() {
+    return $this->encoding;
+  }
 
-    /**
-     * Get Encoding
-     *
-     * @return  string
-     */
-    public function getEncoding() {
-      return $this->encoding;
-    }
+  /**
+   * Set Data
+   *
+   * @param   lang.Object data
+   */
+  public function setData($data) { }
 
-    /**
-     * Set Data
-     *
-     * @param   lang.Object data
-     */
-    public function setData($data) { }
+  /**
+   * Get Data
+   *
+   * @return  lang.Object
+   */
+  public function getData() {
+    return $this->data;
+  }
+  
+  /**
+   * Retrieve serialized representation
+   *
+   * @return  string
+   */
+  public function serializeData() {
+    return JsonFactory::create()->encode($this->data);
+  }
+  
+  /**
+   * Set Class
+   *
+   * @param   string class
+   */
+  public function setHandlerClass($class) {
+    $this->class= $class;
+  }
 
-    /**
-     * Get Data
-     *
-     * @return  lang.Object
-     */
-    public function getData() {
-      return $this->data;
-    }
-    
-    /**
-     * Retrieve serialized representation
-     *
-     * @return  string
-     */
-    public function serializeData() {
-      return JsonFactory::create()->encode($this->data);
-    }
-    
-    /**
-     * Set Class
-     *
-     * @param   string class
-     */
-    public function setHandlerClass($class) {
-      $this->class= $class;
-    }
+  /**
+   * Get Class
+   *
+   * @return  string
+   */
+  public function getHandlerClass() {
+    return $this->class;
+  }
+  
+  /**
+   * Set fault
+   *
+   * @param   string faultCode
+   * @param   string faultString
+   */
+  public function setFault($faultCode, $faultString) {
+    $this->data= array(
+      'result'  => false,
+      'error'   => array(
+        'faultCode'   => $faultCode,
+        'faultString' => $faultString
+      ),
+      'id'      => null
+    );
+  }
+  
+  /**
+   * Get fault
+   *
+   * @return  scriptlet.rpc.RpcFault
+   */
+  public function getFault() {
+    return empty($this->data['error']) ? null : new \scriptlet\rpc\RpcFault(
+      $this->data['error']['faultCode'],
+      $this->data['error']['faultString']
+    );
+  }        
 
-    /**
-     * Get Class
-     *
-     * @return  string
-     */
-    public function getHandlerClass() {
-      return $this->class;
-    }
-    
-    /**
-     * Set fault
-     *
-     * @param   string faultCode
-     * @param   string faultString
-     */
-    public function setFault($faultCode, $faultString) {
-      $this->data= array(
-        'result'  => FALSE,
-        'error'   => array(
-          'faultCode'   => $faultCode,
-          'faultString' => $faultString
-        ),
-        'id'      => NULL
-      );
-    }
-    
-    /**
-     * Get fault
-     *
-     * @return  scriptlet.rpc.RpcFault
-     */
-    public function getFault() {
-      return empty($this->data['error']) ? NULL : new RpcFault(
-        $this->data['error']['faultCode'],
-        $this->data['error']['faultString']
-      );
-    }        
+  /**
+   * Set Id
+   *
+   * @param   string id
+   */
+  public function setId($id) {
+    $this->id= $id;
+  }
 
-    /**
-     * Set Id
-     *
-     * @param   string id
-     */
-    public function setId($id) {
-      $this->id= $id;
-    }
-
-    /**
-     * Get Id
-     *
-     * @return  string
-     */
-    public function getId() {
-      return $this->id;
-    }
-  } 
-?>
+  /**
+   * Get Id
+   *
+   * @return  string
+   */
+  public function getId() {
+    return $this->id;
+  }
+} 

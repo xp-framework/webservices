@@ -10,24 +10,21 @@ use webservices\soap\types\SOAPDateTime;
 use webservices\soap\types\SOAPLong;
 use util\Binford;
 
-
 /**
- * TestCase
- *
- * @see       ...
- * @purpose   TestCase for
+ * TestCase for XPSoapNode class
  */
 class XPSoapNodeTest extends TestCase {
 
+  /**
+   * Helper method
+   *
+   * @param  var $object
+   * @return webservices.soap.xp.XPSoapNode
+   */
   protected function node($object) {
-    $node= XPSoapNode::fromArray(array($object), 'array', new XPSoapMapping());
-    return $node->nodeAt(0);
+    return XPSoapNode::fromArray(array($object), 'array', new XPSoapMapping())->nodeAt(0);
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleNull() {
     $this->assertEquals(
@@ -36,10 +33,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleString() {
     $this->assertEquals(
@@ -48,10 +41,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function stringType() {
     $this->assertEquals(
@@ -60,10 +49,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleInteger() {
     $this->assertEquals(
@@ -72,10 +57,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function integerType() {
     $this->assertEquals(
@@ -84,10 +65,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function soapLong() {
     $this->assertEquals(
@@ -96,10 +73,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function longType() {
     $this->assertEquals(
@@ -108,10 +81,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function namedParameter() {
     $this->assertEquals(
@@ -120,10 +89,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleBoolean() {
     $this->assertEquals(
@@ -132,10 +97,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function booleanType() {
     $this->assertEquals(
@@ -144,10 +105,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleDouble() {
     $this->assertEquals(
@@ -156,10 +113,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function doubleType() {
     $this->assertEquals(
@@ -168,10 +121,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleHashmap() {
     $this->assertEquals(
@@ -181,10 +130,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function soapHashmap() {
     $node= new XPSoapNode('item', '', array('xmlns:hash' => 'http://xml.apache.org/xml-soap', 'xsi:type' => 'hash:Map'));
@@ -198,10 +143,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleArray() {
     $this->assertEquals(
@@ -213,10 +154,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function emptyArray() {
     $this->assertEquals(
@@ -225,10 +162,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleObject() {
     $this->assertEquals(
@@ -238,10 +171,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function simpleDate() {
     $this->assertEquals(
@@ -250,10 +179,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  /**
-   * Test
-   *
-   */
   #[@test]
   public function soapDate() {
     $this->assertEquals(

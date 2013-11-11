@@ -1,31 +1,28 @@
-<?php
-/* This class is part of the XP framework
- *
- * $Id$
- */
+<?php namespace webservices\xmlrpc\rpc;
  
-  uses('scriptlet.rpc.AbstractRpcResponse', 'peer.http.HttpConstants');
+use scriptlet\rpc\AbstractRpcResponse;
+use peer\http\HttpConstants;
+
+
+/**
+ * Wraps XML-RPC response
+ *
+ * @see scriptlet.HttpScriptletResponse  
+ */
+class XmlRpcResponse extends AbstractRpcResponse {
   
   /**
-   * Wraps XML-RPC response
+   * Make sure a fault is passed as "500 Internal Server Error"
    *
-   * @see scriptlet.HttpScriptletResponse  
+   * @see     scriptlet.HttpScriptletResponse#process
    */
-  class XmlRpcResponse extends AbstractRpcResponse {
-    
-    /**
-     * Make sure a fault is passed as "500 Internal Server Error"
-     *
-     * @see     scriptlet.HttpScriptletResponse#process
-     */
-    public function process() {
-      if (!$this->message) return;
+  public function process() {
+    if (!$this->message) return;
 
-      if (NULL !== $this->message->getFault()) {
-        $this->setStatus(HttpConstants::STATUS_INTERNAL_SERVER_ERROR);
-      }
-      $this->content= $this->message->serializeData();
-      $this->cat && $this->cat->debug('>>> ', $this->content);
+    if (null !== $this->message->getFault()) {
+      $this->setStatus(HttpConstants::STATUS_INTERNAL_SERVER_ERROR);
     }
+    $this->content= $this->message->serializeData();
+    $this->cat && $this->cat->debug('>>> ', $this->content);
   }
-?>
+}

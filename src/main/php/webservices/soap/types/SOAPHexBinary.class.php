@@ -1,82 +1,77 @@
-<?php
-/* This class is part of the XP framework
+<?php namespace webservices\soap\types;
+
+
+
+/**
+ * SOAP Hex binary
  *
- * $Id$
+ * @see      xp://webservices.soap.xp.XPSoapNode
+ * @purpose  Transport hex encoded data
  */
-
-  uses('webservices.soap.types.SoapType');
-
+class SOAPHexBinary extends \lang\Object implements SoapType {
+  public
+    $string,
+    $encoded;
+  
   /**
-   * SOAP Hex binary
+   * Constructor
    *
-   * @see      xp://webservices.soap.xp.XPSoapNode
-   * @purpose  Transport hex encoded data
+   * @param   string string
+   * @param   bool encoded default FALSE
    */
-  class SOAPHexBinary extends Object implements SoapType {
-    public
-      $string,
-      $encoded;
-    
-    /**
-     * Constructor
-     *
-     * @param   string string
-     * @param   bool encoded default FALSE
-     */
-    public function __construct($string, $encoded= FALSE) {
-      if ($encoded) {
-        $this->string= pack('H*', $string);
-        $this->encoded= $string;
-      } else {
-        $this->string= $string;
-        $this->encoded= bin2hex($string);
-      }
-    }
-    
-    /**
-     * Return a string representation for use in SOAP
-     *
-     * @return  string 
-     */
-    public function toString() {
-      return $this->encoded;
-    }
-    
-    /**
-     * Returns this type's name
-     *
-     * @return  string
-     */
-    public function getType() {
-      return 'xsd:hexBinary';
-    }
-    
-    /**
-     * Indicates whether the compared binary equals this one.
-     *
-     * @param   webservices.soap.types.SOAPHexBinary cmp
-     * @return  bool TRUE if both binaries are equal
-     */
-    public function equals($cmp) {
-      return is('webservices.soap.types.SOAPHexBinary', $cmp) && (0 === strcmp($this->string, $cmp->string));
-    }
-
-    /**
-     * Retrieve item name
-     *
-     * @return  mixed
-     */
-    public function getItemName() {
-      return FALSE;
-    }
-
-    /**
-     * Retrieve type as native SOAP type
-     *
-     * @return  php.SoapVar
-     */
-    public function asSoapType() {
-      return new SoapVar($this->encoded, XSD_HEXBINARY);
+  public function __construct($string, $encoded= false) {
+    if ($encoded) {
+      $this->string= pack('H*', $string);
+      $this->encoded= $string;
+    } else {
+      $this->string= $string;
+      $this->encoded= bin2hex($string);
     }
   }
-?>
+  
+  /**
+   * Return a string representation for use in SOAP
+   *
+   * @return  string 
+   */
+  public function toString() {
+    return $this->encoded;
+  }
+  
+  /**
+   * Returns this type's name
+   *
+   * @return  string
+   */
+  public function getType() {
+    return 'xsd:hexBinary';
+  }
+  
+  /**
+   * Indicates whether the compared binary equals this one.
+   *
+   * @param   webservices.soap.types.SOAPHexBinary cmp
+   * @return  bool TRUE if both binaries are equal
+   */
+  public function equals($cmp) {
+    return is('webservices.soap.types.SOAPHexBinary', $cmp) && (0 === strcmp($this->string, $cmp->string));
+  }
+
+  /**
+   * Retrieve item name
+   *
+   * @return  mixed
+   */
+  public function getItemName() {
+    return false;
+  }
+
+  /**
+   * Retrieve type as native SOAP type
+   *
+   * @return  php.SoapVar
+   */
+  public function asSoapType() {
+    return new SoapVar($this->encoded, XSD_HEXBINARY);
+  }
+}

@@ -1,32 +1,26 @@
-<?php
-/* This class is part of the XP framework
- *
- * $Id$
- */
+<?php namespace webservices\xmlrpc\rpc;
  
-  uses(
-    'scriptlet.rpc.AbstractRpcRequest',
-    'webservices.xmlrpc.XmlRpcRequestMessage'
-  );
-  
+use scriptlet\rpc\AbstractRpcRequest;
+use webservices\xmlrpc\XmlRpcRequestMessage;
+
+
+/**
+ * Wraps XMl-RPC Rpc Router request
+ *
+ * @see webservices.xmlrpc.rpc.XmlRpcRouter
+ * @see scriptlet.HttpScriptletRequest
+ */
+class XmlRpcRequest extends AbstractRpcRequest {
+
   /**
-   * Wraps XMl-RPC Rpc Router request
+   * Retrieve XML-RPC message from request
    *
-   * @see webservices.xmlrpc.rpc.XmlRpcRouter
-   * @see scriptlet.HttpScriptletRequest
+   * @return  webservices.xmlrpc.XmlRpcMessage message object
    */
-  class XmlRpcRequest extends AbstractRpcRequest {
-  
-    /**
-     * Retrieve XML-RPC message from request
-     *
-     * @return  webservices.xmlrpc.XmlRpcMessage message object
-     */
-    public function getMessage() {
-      $this->cat && $this->cat->debug('<<< ', $this->getData());
-      $m= XmlRpcRequestMessage::fromString($this->getData());
-      $m->setEncoding($this->getEncoding());
-      return $m;
-    }
+  public function getMessage() {
+    $this->cat && $this->cat->debug('<<< ', $this->getData());
+    $m= XmlRpcRequestMessage::fromString($this->getData());
+    $m->setEncoding($this->getEncoding());
+    return $m;
   }
-?>
+}

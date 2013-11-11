@@ -1,15 +1,10 @@
-<?php
-/* This class is part of the XP framework
- *
- * $Id$ 
- */
+<?php namespace webservices\json;
 
-  /**
-   * Represents a Jsonexception
-   *
-   * @see      xp://webservices.json.JsonDecoder
-   * @purpose  Exception for Json
-   */
-  class JsonException extends XPException {
-  }
-?>
+/**
+ * Represents a Jsonexception
+ *
+ * @see      xp://webservices.json.JsonDecoder
+ * @purpose  Exception for Json
+ */
+class JsonException extends \lang\XPException {
+}

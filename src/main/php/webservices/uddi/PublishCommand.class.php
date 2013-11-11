@@ -1,16 +1,11 @@
-<?php
-/* This class is part of the XP framework
+<?php namespace webservices\uddi;
+
+
+
+/**
+ * (Insert class' description here)
  *
- * $Id$ 
+ * @purpose  Interface
  */
-
-  uses('webservices.uddi.UDDICommand');
-
-  /**
-   * (Insert class' description here)
-   *
-   * @purpose  Interface
-   */
-  interface PublishCommand extends UDDICommand {
-  }
-?>
+interface PublishCommand extends UDDICommand {
+}

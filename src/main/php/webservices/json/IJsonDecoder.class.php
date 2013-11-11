@@ -1,33 +1,28 @@
-<?php
-/* This class is part of the XP framework
+<?php namespace webservices\json;
+
+/**
+ * Interface a Json decoder has to implement
  *
- * $Id$ 
+ * @ext      extension
+ * @see      reference
+ * @purpose  purpose
  */
+interface IJsonDecoder {
 
   /**
-   * Interface a Json decoder has to implement
+   * Encode data into string
    *
-   * @ext      extension
-   * @see      reference
-   * @purpose  purpose
+   * @param   var data
+   * @return  string
    */
-  interface IJsonDecoder {
+  public function encode($data);
   
-    /**
-     * Encode data into string
-     *
-     * @param   var data
-     * @return  string
-     */
-    public function encode($data);
-    
-    /**
-     * Decode string into data
-     *
-     * @param   string string
-     * @return  var
-     */
-    public function decode($string);      
-  
-  }
-?>
+  /**
+   * Decode string into data
+   *
+   * @param   string string
+   * @return  var
+   */
+  public function decode($string);      
+
+}

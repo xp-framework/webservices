@@ -1,15 +1,10 @@
-<?php
-/* This class is part of the XP framework
- *
- * $Id$ 
- */
+<?php namespace webservices\wddx;
 
-  /**
-   * WDDX Fault
-   *
-   * @purpose  Exception
-   */
-  class WddxFaultException extends XPException {
-    
-  }
-?>
+/**
+ * WDDX Fault
+ *
+ * @purpose  Exception
+ */
+class WddxFaultException extends \lang\XPException {
+  
+}

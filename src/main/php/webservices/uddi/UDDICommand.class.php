@@ -1,31 +1,26 @@
-<?php
-/* This class is part of the XP framework
+<?php namespace webservices\uddi;
+
+/**
+ * Base interface for all UDDI commands
  *
- * $Id$ 
+ * @purpose  Interface
+ * @see      xp://webservices.uddi.InquiryCommand
+ * @see      xp://webservices.uddi.PublishCommand
  */
+interface UDDICommand {
 
   /**
-   * Base interface for all UDDI commands
+   * Marshal command to a specified node
    *
-   * @purpose  Interface
-   * @see      xp://webservices.uddi.InquiryCommand
-   * @see      xp://webservices.uddi.PublishCommand
+   * @param   xml.Node node
    */
-  interface UDDICommand {
+  public function marshalTo($node);
 
-    /**
-     * Marshal command to a specified node
-     *
-     * @param   xml.Node node
-     */
-    public function marshalTo($node);
-
-    /**
-     * Unmarshal return value from a specified node
-     *
-     * @param   xml.Node node
-     * @return  lang.Object
-     */
-    public function unmarshalFrom($node);
-  }
-?>
+  /**
+   * Unmarshal return value from a specified node
+   *
+   * @param   xml.Node node
+   * @return  lang.Object
+   */
+  public function unmarshalFrom($node);
+}

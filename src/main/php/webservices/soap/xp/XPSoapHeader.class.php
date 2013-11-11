@@ -1,24 +1,19 @@
-<?php
-/* This class is part of the XP framework
+<?php namespace webservices\soap\xp;
+
+/**
+ * SOAP Header interface
  *
- * $Id$ 
+ * @see      xp://webservices.soap.SOAPHeaderElement
+ * @purpose  Interface
  */
+interface XPSoapHeader {
 
   /**
-   * SOAP Header interface
+   * Retrieve XML representation of this header for use in a SOAP
+   * message.
    *
-   * @see      xp://webservices.soap.SOAPHeaderElement
-   * @purpose  Interface
+   * @param   [:string] ns list of namespaces
+   * @return  xml.Node
    */
-  interface XPSoapHeader {
-
-    /**
-     * Retrieve XML representation of this header for use in a SOAP
-     * message.
-     *
-     * @param   [:string] ns list of namespaces
-     * @return  xml.Node
-     */
-    public function getNode($ns);
-  }
-?>
+  public function getNode($ns);
+}
