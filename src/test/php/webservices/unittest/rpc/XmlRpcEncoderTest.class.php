@@ -65,7 +65,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function stringWithUmlauts() {
-    $this->assertEquals('<value><string>Hällo</string></value>', $this->encode('Hällo'));
+    $this->assertEquals('<value><string>HÃ¤llo</string></value>', $this->encode('HÃ¤llo'));
   }
 
   /**

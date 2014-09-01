@@ -64,7 +64,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function stringWithUmlauts() {
-    $this->assertEquals('H�llo', $this->decode('<string>Hällo</string>'));
+    $this->assertEquals('Hällo', $this->decode('<string>Hällo</string>'));
   }
 
   /**
@@ -205,7 +205,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertClass($vo, 'webservices.unittest.rpc.ValueObject');
+    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
     $this->assertEquals('Timm', $vo->getName());
     $this->assertEquals(30, $vo->getAge());
     $this->assertEquals(true, $vo->isNew());
@@ -233,7 +233,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertClass($vo, 'webservices.unittest.rpc.ValueObject');
+    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
     $this->assertEquals('Timm', $vo->getName());
     $this->assertEquals(0, $vo->getAge());
     $this->assertEquals(true, $vo->isNew());
@@ -257,7 +257,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertClass($vo, 'webservices.unittest.rpc.ValueObject');
+    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
     $this->assertFalse(property_exists($vo, 'Power'));
   }
 
@@ -279,7 +279,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertClass($vo, 'webservices.unittest.rpc.ValueObject');
+    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
     $this->assertNull($vo->getClass()->getField('cache')->get(null));
   }
 

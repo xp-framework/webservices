@@ -17,7 +17,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
   public function setUp() {
     $this->router= new XmlRpcRouterMock('webservices.unittest.rpc.impl');
     $this->router->setMockMethod(\peer\http\HttpConstants::POST);
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>DummyRpcImplementation.getImplementationName</methodName>
         <params/>
@@ -34,7 +34,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
     $this->router->init();
     $response= $this->router->process();
     $this->assertEquals(200, $response->statusCode);
-    $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=iso-8859-1');
+    $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=utf-8');
     
     $msg= \webservices\xmlrpc\XmlRpcResponseMessage::fromString($response->getContent());
     $this->assertEquals('webservices.unittest.rpc.impl.DummyRpcImplementationHandler', $msg->getData());
@@ -57,7 +57,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
    */
   #[@test]
   public function callNonexistingClass() {
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>ClassDoesNotExist.getImplementationName</methodName>
         <params/>
@@ -76,7 +76,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
    */
   #[@test]
   public function callNonexistingMethod() {
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>DummyRpcImplementation.methodDoesNotExist</methodName>
         <params/>
@@ -95,7 +95,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
    */
   #[@test]
   public function callNonWebmethodMethod() {
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>DummyRpcImplementation.methodExistsButIsNotAWebmethod</methodName>
         <params/>
@@ -114,7 +114,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
    */
   #[@test]
   public function callFailingMethod() {
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>DummyRpcImplementation.giveMeFault</methodName>
         <params/>
@@ -137,7 +137,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
    */
   #[@test]
   public function multipleParameters() {
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <methodCall>
         <methodName>DummyRpcImplementation.checkMultipleParameters</methodName>
         <params>
@@ -183,7 +183,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
     
     $this->router->init();
     $response= $this->router->process();
-    $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=iso-8859-1');
+    $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=utf-8');
     $this->assertEquals(200, $response->statusCode);
     
     $msg= \webservices\xmlrpc\XmlRpcResponseMessage::fromString($response->getContent());

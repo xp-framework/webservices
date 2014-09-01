@@ -21,9 +21,9 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->router->setMockMethod(\peer\http\HttpConstants::POST);
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#getImplementationName',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <SOAP-ENV:Envelope
        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -71,7 +71,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function callNonexistingClass() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'NonExistingClass#getImplementationName',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
     
     $this->router->init();
@@ -88,7 +88,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function callNonexistingMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#nonExistingMethod',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
     $this->router->init();
     $response= $this->router->process();
@@ -105,7 +105,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function callNonWebmethodMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#methodExistsButIsNotAWebmethod',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
     $this->router->init();
     $response= $this->router->process();
@@ -122,7 +122,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function callFailingMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#giveMeFault',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
     $this->router->init();
     $response= $this->router->process();
@@ -142,9 +142,9 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function multipleParameters() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#checkMultipleParameters',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1'
+      'Content-Type'  => 'text/xml; charset=utf-8'
     ));
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -187,7 +187,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   }
   
   /**
-   * Test messages in encoding ISO-8859-1 are deserialized
+   * Test messages in encoding utf-8 are deserialized
    * correctly
    *
    */
@@ -196,11 +196,11 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->router->setMockHeaders(array(
       'Host'          => 'outage.xp-framework.net',
       'Connection'    => 'Keep-Alive',
-      'Content-Type'  => 'text/xml; charset=iso-8859-1',
+      'Content-Type'  => 'text/xml; charset=utf-8',
       'SOAPAction'    => 'DummyRpcImplementation#checkUTF8Content',
       'User-Agent'    => 'PHP SOAP 0.1'
     ));
-    $this->router->setMockData('<?xml version="1.0" encoding="iso-8859-1"?>
+    $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <SOAP-ENV:Envelope 
        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
        xmlns:ns1="urn:Outage" 
@@ -210,7 +210,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
         <SOAP-ENV:Body>
           <ns1:createDSLOutageStringDate>
-            <description xsi:type="xsd:string">St�rung in D�sseldorf</description>
+            <description xsi:type="xsd:string">Störung in Düsseldorf</description>
           </ns1:createDSLOutageStringDate>
         </SOAP-ENV:Body>
       </SOAP-ENV:Envelope>
@@ -248,7 +248,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
         <SOAP-ENV:Body>
           <ns1:createDSLOutageStringDate>
-            <description xsi:type="xsd:string">Störung in Düsseldorf</description>
+            <description xsi:type="xsd:string">StÃ¶rung in DÃ¼sseldorf</description>
           </ns1:createDSLOutageStringDate>
         </SOAP-ENV:Body>
       </SOAP-ENV:Envelope>
@@ -261,8 +261,8 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     
     // $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=utf-8');
     $this->assertStringContained(
-      new \lang\types\String('St�rung in D�sseldorf', 'iso-8859-1'),
-      new \lang\types\String($response->getContent(), 'iso-8859-1')
+      new \lang\types\String('Störung in Düsseldorf', 'utf-8'),
+      new \lang\types\String($response->getContent(), 'utf-8')
     );
   }
 }
