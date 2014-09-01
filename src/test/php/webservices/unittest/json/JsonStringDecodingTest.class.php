@@ -1,7 +1,5 @@
 <?php namespace webservices\unittest\json;
 
-
-
 /**
  * Testcase for JsonDecoder which decodes strings
  *
@@ -15,7 +13,7 @@ class JsonStringDecodingTest extends JsonDecodingTest {
    * @param   string input
    * @return  var
    */
-  protected function decode($input, $targetEncoding= 'iso-8859-1') {
+  protected function decode($input, $targetEncoding= 'utf-8') {
     return $this->fixture->decode($input, $targetEncoding);
   }
 }

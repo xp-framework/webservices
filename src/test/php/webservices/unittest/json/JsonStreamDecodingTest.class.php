@@ -2,7 +2,6 @@
 
 use io\streams\MemoryInputStream;
 
-
 /**
  * Testcase for JsonDecoder which decodes streams
  *
@@ -16,7 +15,7 @@ class JsonStreamDecodingTest extends JsonDecodingTest {
    * @param   string input
    * @return  var
    */
-  protected function decode($input, $targetEncoding= 'iso-8859-1') {
+  protected function decode($input, $targetEncoding= 'utf-8') {
     return $this->fixture->decodeFrom(new MemoryInputStream($input), $targetEncoding);
   }
 }
