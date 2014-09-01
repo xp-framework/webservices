@@ -61,7 +61,7 @@ class JsonEncodingTest extends TestCase {
    */
   #[@test]
   public function encodeUTF8String() {
-    $this->assertEquals('"f\u00f6o"', $this->encode('f�o'));
+    $this->assertEquals('"f\u00f6o"', $this->encode('föo'));
   }
 
   /**
@@ -429,7 +429,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeStringObjectWithUmlat() {
     $this->assertEquals(
       '"E\u00fcro"',
-      $this->encode(new String("Eüro", 'utf-8'))
+      $this->encode(new String('Eüro'))
     );
   }
 
