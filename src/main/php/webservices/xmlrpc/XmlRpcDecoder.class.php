@@ -97,7 +97,7 @@ class XmlRpcDecoder extends \lang\Object {
         return (string)$c->getContent();
       
       case 'dateTime.iso8601':
-        return Date::fromString($c->getContent());
+        return new Date($c->getContent());
       
       case 'nil':
         return null;
