@@ -248,7 +248,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
         <SOAP-ENV:Body>
           <ns1:createDSLOutageStringDate>
-            <description xsi:type="xsd:string">StÃ¶rung in DÃ¼sseldorf</description>
+            <description xsi:type="xsd:string">Störung in Düsseldorf</description>
           </ns1:createDSLOutageStringDate>
         </SOAP-ENV:Body>
       </SOAP-ENV:Envelope>
