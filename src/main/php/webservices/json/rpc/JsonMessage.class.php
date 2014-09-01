@@ -3,7 +3,6 @@
 use webservices\rpc\AbstractRpcMessage;
 use webservices\json\JsonFactory;
 
-
 /**
  * Json Message
  *

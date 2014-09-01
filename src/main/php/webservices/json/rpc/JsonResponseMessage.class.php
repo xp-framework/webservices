@@ -1,6 +1,6 @@
 <?php namespace webservices\json\rpc;
 
-
+use webservices\json\JsonFactory;
 
 /**
  * JSON response message
