@@ -16,17 +16,17 @@ use lang\types\ArrayList;
 abstract class SoapTypeMapper extends \lang\Object {
   protected
     $handler= array(
-      'Parameter' => true,
-      'SoapType'  => true,
-      'String'    => true,
-      'Long'      => true,
-      'Integer'   => true,
-      'Short'     => true,
-      'Double'    => true,
-      'Boolean'   => true,
-      'Bytes'     => true,
-      'Character' => true,
-      'Date'      => true
+      'webservices\\soap\\Parameter' => 'boxParameter',
+      'SoapType'                     => 'boxSoapType',
+      'lang\\types\\String'          => 'boxString',
+      'lang\\types\\Long'            => 'boxLong',
+      'lang\\types\\Integer'         => 'boxInteger',
+      'lang\\types\\Short'           => 'boxShort',
+      'lang\\types\\Double'          => 'boxDouble',
+      'lang\\types\\Boolean'         => 'boxBoolean',
+      'lang\\types\\Bytes'           => 'boxBytes',
+      'lang\\types\\Character'       => 'boxCharacter',
+      'util\\Date'                   => 'boxDate'
     );
 
   /**
@@ -36,8 +36,8 @@ abstract class SoapTypeMapper extends \lang\Object {
    * @return  boolean
    */
   public function supports($object) {
-    foreach ($this->handler as $handler => $t) {
-      if ($object instanceof $handler) return true;
+    foreach ($this->handler as $class => $handler) {
+      if ($object instanceof $class) return true;
     }
 
     return false;
@@ -51,10 +51,10 @@ abstract class SoapTypeMapper extends \lang\Object {
    * @throws  lang.IllegalArgumentException if type is not supported
    */
   public function box($object) {
-    foreach ($this->handler as $handler => $t) {
-      if (!$object instanceof $handler) continue;
+    foreach ($this->handler as $class => $handler) {
+      if (!$object instanceof $class) continue;
 
-      return call_user_func(array($this, 'box'.$handler), $object);
+      return call_user_func(array($this, $handler), $object);
     }
 
     throw new \lang\IllegalArgumentException('Type '.\xp::typeOf($object).' is not supported.');

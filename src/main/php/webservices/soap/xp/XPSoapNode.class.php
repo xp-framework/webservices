@@ -122,7 +122,7 @@ class XPSoapNode extends Node {
     }
 
     if ($value instanceof \lang\types\Double) {
-      $value= new SOAPDouble($value->floatValue());
+      $value= new SOAPDouble($value->doubleValue());
       // Fallthrough intended
     }
 

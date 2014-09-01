@@ -38,7 +38,7 @@ class SoapMappingTest extends TestCase {
     );
     
     $res= $client->invoke('test');
-    $this->assertClass($res, 'webservices.unittest.soap.SoapMappingTestTarget');
+    $this->assertInstanceOf('webservices.unittest.soap.SoapMappingTestTarget', $res);
     $this->assertEquals('Test-String', $res->getString());
     $this->assertEquals(12345, $res->getInteger());
   }

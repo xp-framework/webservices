@@ -35,14 +35,14 @@ class SoapTest extends TestCase {
     $this->assertEquals('Test', $msg->action);
     $this->assertEquals('testSerialization', $msg->method);
     $this->assertEquals('SOAP-ENV:Envelope', $msg->root()->getName());
-    $this->assertNotEmpty($msg->root()->getAttributes());
+    $this->assertNotEquals(0, sizeof($msg->root()->getAttributes()));
     $msg->setData(array(
       'int'       => 1,
       'float'     => 6.1,
       'string'    => 'Binford',
       'string2'   => '"<&>"',
       'bool'      => true,
-      'date'      => \util\Date::fromString('1977-12-14 11:55AM Europe/Berlin'),
+      'date'      => new \util\Date('1977-12-14 11:55AM Europe/Berlin'),
       'null'      => null,
       'array'     => array(2, 3),
       'hash'      => array(
@@ -126,7 +126,7 @@ class SoapTest extends TestCase {
     
     $headers= $msg->getHeaders();
     $this->assertNotEquals(null, $msg->getHeaders());
-    $this->assertEquals(1, sizeof ($headers));
-    foreach ($headers as $h) { $this->assertSubclass($h, 'webservices.soap.xp.XPSoapHeaderElement'); }
+    $this->assertEquals(1, sizeof($headers));
+    $this->assertInstanceOf('webservices.soap.xp.XPSoapHeaderElement[]', $headers);
   }
 }
