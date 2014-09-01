@@ -40,7 +40,7 @@ abstract class JsonDecodingTest extends TestCase {
    * @param   string input
    * @return  var
    */
-  protected abstract function decode($input, $targetEncoding= 'iso-8859-1');
+  protected abstract function decode($input, $targetEncoding= 'utf-8');
   
   /**
    * Test string decoding
@@ -211,7 +211,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeUTF8String() {
     $this->assertEquals(
-      'Knüper',
+      'KnÃ¼per',
       $this->decode('"KnÃ¼per"')
     );
   }
@@ -222,7 +222,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test, @expect(class= 'webservices.json.JsonException', withMessage= '/Cannot decode string/')]
   public function decodeInvalidUTF8String() {
-    $this->decode('"Knüper"');
+    $this->decode("\"Kn\xfcper\"");
   }
 
   /**
@@ -241,7 +241,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeUTF8StringWithUnicodeCodepoint() {
     $this->assertEquals(
-      'Günther',
+      'GÃ¼nther',
       $this->decode('"G\u00fcnther"')
     );
   }
@@ -253,7 +253,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeUTF8StringWithEuroSymbol() {
     $this->assertEquals(
-      "\xe2\x82\xacuro",
+      "â‚¬uro",
       $this->decode('"\u20ACuro"', 'utf-8')
     );
   }
@@ -871,7 +871,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function objectKeyTreatedAsIso88591() {
     $this->assertEquals(
-      array('über' => 'coder'),
+      array('Ã¼ber' => 'coder'),
       $this->decode('{ "\u00FCber" : "coder" }')
     );
   }
