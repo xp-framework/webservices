@@ -801,7 +801,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test,@expect('webservices.json.JsonException')]
   public function decodeInvalidData() {
-    $this->decode('<xml version="1.0" encoding="iso-8859-1"?><document/>');
+    $this->decode('<xml version="1.0"?><document/>');
   }
 
   /**

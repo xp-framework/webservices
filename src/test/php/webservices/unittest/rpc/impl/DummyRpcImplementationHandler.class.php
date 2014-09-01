@@ -79,7 +79,7 @@ class DummyRpcImplementationHandler extends \lang\Object {
    */
   #[@webmethod]
   public function checkUTF8Content($string) {
-    if ('Störung in Düsseldorf' !== $string) {
+    if ('StÃ¶rung in DÃ¼sseldorf' !== $string) {
       throw new \lang\IllegalArgumentException('Invalid encoding: "'.$string.'"');
     }
     

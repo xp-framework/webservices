@@ -48,7 +48,7 @@ class XPSoapNode extends Node {
   }
   
   /**
-   * Get content in iso-8859-1 encoding (the default).
+   * Get content (the default).
    *
    * @param   string encoding
    * @param   var namespaces
@@ -96,9 +96,7 @@ class XPSoapNode extends Node {
     }
     
     // Decode if necessary
-    switch (strtolower($encoding)) {
-      case 'utf-8': $ret= iconv('utf-8', \xp::ENCODING, $ret); break;
-    }
+    $ret= iconv($encoding, \xp::ENCODING, $ret);
 
     // Set type
     settype($ret, $t);

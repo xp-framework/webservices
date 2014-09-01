@@ -44,6 +44,6 @@ abstract class AbstractRpcRequest extends HttpScriptletRequest implements Tracea
       return substr($type, $pos+ 8);
     }
     
-    return 'iso-8859-1';
+    return \xp::ENCODING;
   }
 } 

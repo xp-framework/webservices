@@ -20,7 +20,7 @@ define('XMLNS_XP',            'http://xp-framework.net/xmlns/xp');
  *
  * Example message in its XML representation:
  * <pre>
- * <?xml version="1.0" encoding="iso-8859-1"?>
+ * <?xml version="1.0" encoding="utf-8"?>
  * <SOAP-ENV:Envelope
  *  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  *  xmlns:xsd="http://www.w3.org/2001/XMLSchema"

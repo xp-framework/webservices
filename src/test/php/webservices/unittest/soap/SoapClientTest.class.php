@@ -19,7 +19,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testMultipleOutputArguments() {
     $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -51,7 +51,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testNoOutputArguments() {
     $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -80,7 +80,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testOneOutputArguments() {
     $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -110,7 +110,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testRootArrayResult() {
     $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -144,7 +144,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testRootArrayResultWithNS() {
     $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -179,7 +179,7 @@ class SoapClientTest extends TestCase {
   #[@test]
   public function testDeepArrayResult() {
         $transport= new SOAPDummyTransport();
-    $transport->setAnswer('<?xml version="1.0" encoding="iso-8859-1"?>
+    $transport->setAnswer('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
