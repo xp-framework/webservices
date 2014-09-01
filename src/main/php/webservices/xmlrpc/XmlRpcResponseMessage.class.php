@@ -1,7 +1,5 @@
 <?php namespace webservices\xmlrpc;
 
-
-
 /**
  * XmlRpc response message. 
  *
@@ -51,7 +49,7 @@ class XmlRpcResponseMessage extends XmlRpcMessage {
    * @param   var arr
    */
   public function setData($value) {
-    $encoder= new \XmlRpcEncoder();
+    $encoder= new XmlRpcEncoder();
 
     $params= $this->tree->root()->addChild(new \xml\Node('params'));
     $param= $params->addChild(new \xml\Node('param'));
@@ -74,7 +72,7 @@ class XmlRpcResponseMessage extends XmlRpcMessage {
     }
 
     // Process params node
-    $decoder= new \XmlRpcDecoder();
+    $decoder= new XmlRpcDecoder();
     
     // Access node /methodResponse/params/param/value node
     return $decoder->decode($this->tree->root()->nodeAt(0)->nodeAt(0)->nodeAt(0));

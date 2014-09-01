@@ -1,6 +1,6 @@
 <?php namespace webservices\wddx\transport;
 
-use scriptlet\rpc\transport\AbstractRpcTransport;
+use webservices\rpc\transport\AbstractRpcTransport;
 use webservices\wddx\WddxFaultException;
 use webservices\wddx\WddxMessage;
 use peer\http\HttpConnection;

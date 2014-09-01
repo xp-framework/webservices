@@ -1,8 +1,7 @@
 <?php namespace webservices\xmlrpc\rpc;
 
 use webservices\xmlrpc\XmlRpcResponseMessage;
-use scriptlet\rpc\AbstractRpcRouter;
-
+use webservices\rpc\AbstractRpcRouter;
 
 /**
  * XML-RPC Router class. You can use this class to implement

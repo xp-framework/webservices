@@ -1,6 +1,6 @@
 <?php namespace webservices\xmlrpc\transport;
 
-use scriptlet\rpc\transport\AbstractRpcTransport;
+use webservices\rpc\transport\AbstractRpcTransport;
 use webservices\xmlrpc\XmlRpcFaultException;
 use peer\http\HttpConnection;
 use peer\http\HttpConstants;

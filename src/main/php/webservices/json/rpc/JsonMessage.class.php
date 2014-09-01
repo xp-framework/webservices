@@ -1,6 +1,6 @@
 <?php namespace webservices\json\rpc;
 
-use scriptlet\rpc\AbstractRpcMessage;
+use webservices\rpc\AbstractRpcMessage;
 use webservices\json\JsonFactory;
 
 
@@ -144,7 +144,7 @@ class JsonMessage extends \lang\Object implements AbstractRpcMessage {
    * @return  scriptlet.rpc.RpcFault
    */
   public function getFault() {
-    return empty($this->data['error']) ? null : new \scriptlet\rpc\RpcFault(
+    return empty($this->data['error']) ? null : new \webservices\rpc\RpcFault(
       $this->data['error']['faultCode'],
       $this->data['error']['faultString']
     );

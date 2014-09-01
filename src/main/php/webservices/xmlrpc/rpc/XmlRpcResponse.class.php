@@ -1,6 +1,6 @@
 <?php namespace webservices\xmlrpc\rpc;
  
-use scriptlet\rpc\AbstractRpcResponse;
+use webservices\rpc\AbstractRpcResponse;
 use peer\http\HttpConstants;
 
 

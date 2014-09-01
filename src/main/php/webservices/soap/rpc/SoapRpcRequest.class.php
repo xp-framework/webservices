@@ -1,6 +1,6 @@
 <?php namespace webservices\soap\rpc;
  
-use scriptlet\rpc\AbstractRpcRequest;
+use webservices\rpc\AbstractRpcRequest;
 use webservices\soap\xp\XPSoapMessage;
 
 

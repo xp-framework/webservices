@@ -4,7 +4,7 @@ use xml\Tree;
 use xml\Node;
 use lang\types\ArrayList;
 use webservices\soap\CommonSoapFault;
-use scriptlet\rpc\AbstractRpcMessage;
+use webservices\rpc\AbstractRpcMessage;
 
 
 define('XMLNS_SOAPENV',       'http://schemas.xmlsoap.org/soap/envelope/');

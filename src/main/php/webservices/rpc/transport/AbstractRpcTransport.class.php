@@ -1,7 +1,6 @@
-<?php namespace scriptlet\rpc\transport;
+<?php namespace webservices\rpc\transport;
 
 use util\log\Traceable;
-
 
 /**
  * Base class for RPC transports.
@@ -9,8 +8,7 @@ use util\log\Traceable;
  * @purpose  Base class.
  */
 class AbstractRpcTransport extends \lang\Object implements Traceable {
-  public
-    $cat  = null;
+  public $cat  = null;
     
   /**
    * Set trace for debugging

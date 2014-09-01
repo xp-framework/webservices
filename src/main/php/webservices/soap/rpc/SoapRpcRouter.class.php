@@ -1,8 +1,8 @@
 <?php namespace webservices\soap\rpc;
-use scriptlet\rpc\AbstractRpcRouter;
+
+use webservices\rpc\AbstractRpcRouter;
 use webservices\soap\xp\XPSoapMessage;
 use webservices\soap\xp\XPSoapMapping;
-
 
 /**
  * Serves as a working base for SOAP request passed to a CGI

@@ -1,4 +1,4 @@
 <?php namespace webservices\json\rpc\transport;
 
-use scriptlet\rpc\transport\AbstractRpcTransport;
-use scriptlet\rpc\RpcFaultException;
+use webservices\rpc\transport\AbstractRpcTransport;
+use webservices\rpc\RpcFaultException;

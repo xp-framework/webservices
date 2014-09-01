@@ -3,7 +3,7 @@
 use xml\Tree;
 use xml\Node;
 use util\Date;
-use scriptlet\rpc\AbstractRpcMessage;
+use webservices\rpc\AbstractRpcMessage;
 
 
 // Message-types

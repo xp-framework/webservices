@@ -1,6 +1,6 @@
 <?php namespace webservices\soap\transport;
 
-use scriptlet\rpc\transport\AbstractRpcTransport;
+use webservices\rpc\transport\AbstractRpcTransport;
 use webservices\soap\SOAPFaultException;
 use peer\http\HttpConnection;
 use peer\http\HttpConstants;

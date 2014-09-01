@@ -1,6 +1,6 @@
 <?php namespace webservices\xmlrpc\rpc;
  
-use scriptlet\rpc\AbstractRpcRequest;
+use webservices\rpc\AbstractRpcRequest;
 use webservices\xmlrpc\XmlRpcRequestMessage;
 
 

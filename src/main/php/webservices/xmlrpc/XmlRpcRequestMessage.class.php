@@ -48,7 +48,7 @@ class XmlRpcRequestMessage extends XmlRpcMessage {
    * @param   var arr
    */
   public function setData($arr) {
-    $encoder= new \XmlRpcEncoder();
+    $encoder= new XmlRpcEncoder();
 
     $params= $this->tree->root()->addChild(new \xml\Node('params'));
     if (sizeof($arr)) foreach (array_keys($arr) as $idx) {
@@ -69,7 +69,7 @@ class XmlRpcRequestMessage extends XmlRpcMessage {
         continue;
       
       // Process params node
-      $decoder= new \XmlRpcDecoder();
+      $decoder= new XmlRpcDecoder();
       foreach (array_keys($this->tree->root()->nodeAt($idx)->getChildren()) as $params) {
         $ret[]= $decoder->decode($this->tree->root()->nodeAt($idx)->nodeAt($params)->nodeAt(0));
       }
