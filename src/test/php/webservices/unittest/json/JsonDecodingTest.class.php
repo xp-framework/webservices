@@ -277,21 +277,21 @@ abstract class JsonDecodingTest extends TestCase {
   }
 
   /**
-   * Test number decoding (LONG_MAX)
+   * Test number decoding (PHP_INT_MAX)
    *
    */
   #[@test]
   public function decodeLongMax() {
-    $this->assertEquals(LONG_MAX, $this->decode((string)LONG_MAX));
+    $this->assertEquals(PHP_INT_MAX, $this->decode((string)PHP_INT_MAX));
   }
 
   /**
-   * Test number decoding (LONG_MIN)
+   * Test number decoding (-PHP_INT_MAX -1)
    *
    */
   #[@test]
   public function decodeLongMin() {
-    $this->assertEquals(LONG_MIN, $this->decode((string)LONG_MIN));
+    $this->assertEquals(-PHP_INT_MAX -1, $this->decode((string)-PHP_INT_MAX -1));
   }
 
   /**
