@@ -66,7 +66,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
    */
   public function __construct($rootName= 'document') {
     parent::__construct($rootName);
-    $this->nodeType= \xp::reflect('webservices.soap.xp.XPSoapNode');
+    $this->nodeType= 'webservices\\soap\\xp\\XPSoapNode';
   }
 
   /**
