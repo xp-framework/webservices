@@ -128,8 +128,8 @@ class JsonLexer extends AbstractLexer {
         } else if (is_numeric($this->value) && $this->string == false) {
           if (
             preg_match('/^[\\-]?(([1-9]+[0-9]*)|0){1}$/', $this->value) == 1 &&
-            doubleval($this->value) >= PHP_INT_MAX &&
-            doubleval($this->value) <= -PHP_INT_MAX -1
+            doubleval($this->value) >= -PHP_INT_MAX -1 &&
+            doubleval($this->value) <= PHP_INT_MAX
           ) {
             // Valid Integer turn into integer. (Neccessary fo testing correct.)
             $this->token= JsonParser::T_INT;
