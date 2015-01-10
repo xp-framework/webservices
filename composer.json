@@ -1,0 +1,18 @@
+{
+  "name" : "xp-framework/webservices",
+  "type" : "library",
+  "homepage" : "http://xp-framework.net/",
+  "license" : "BSD-3-Clause",
+  "description" : "Webservices for XP Framework",
+  "keywords": ["module", "xp"],
+  "require" : {
+    "xp-framework/core"      : "dev-master",
+    "xp-framework/xml"       : "~6.0",
+    "xp-framework/parser"    : "~6.0",
+    "xp-framework/scriptlet" : "~6.0",
+    "php" : ">=5.4.0"
+  },
+  "autoload" : {
+    "files" : ["src/main/php/autoload.php"]
+  }
+}
