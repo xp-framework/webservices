@@ -58,21 +58,12 @@ class XmlRpcEncoder extends \lang\Object {
         'value' => array('string' => $data->getClassName())
       ), 'member'));
       
-      $values= (array)$data;
       foreach ($data->getClass()->getFields() as $field) {
-        $m= $field->getModifiers();
-        if ($m & MODIFIER_STATIC) {
-          continue;
-        } else if ($m & MODIFIER_PUBLIC) {
-          $name= $field->getName();
-        } else if ($m & MODIFIER_PROTECTED) {
-          $name= "\0*\0".$field->getName();
-        } else if ($m & MODIFIER_PRIVATE) {
-          $name= "\0".array_search($field->getDeclaringClass()->getName(), \xp::$cn, true)."\0".$field->getName();
-        }
+        if ($field->getModifiers() & MODIFIER_STATIC) continue;
+
         $member= $n->addChild(new Node('member'));
         $member->addChild(new Node('name', $field->getName()));
-        $member->addChild($this->_marshall($values[$name]));
+        $member->addChild($this->_marshall($field->setAccessible(true)->get($data)));
       }
       return $value;
     }
