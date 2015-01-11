@@ -1,9 +1,10 @@
 <?php namespace webservices\xmlrpc;
 
 use xml\XMLFormatException;
+use xml\Node;
 use util\Date;
 use lang\types\Bytes;
-
+use lang\XPClass;
 
 /**
  * XML-RPC decoder
@@ -20,7 +21,7 @@ class XmlRpcDecoder extends \lang\Object {
    * @param   xml.Node node
    * @return  var
    */
-  public function decode(\xml\Node $node) {
+  public function decode(Node $node) {
     return $this->_unmarshall($node);
   }
     
@@ -33,7 +34,7 @@ class XmlRpcDecoder extends \lang\Object {
    * @throws  lang.ClassNotFoundException in case a XP object's class could not be loaded
    * @throws  xml.XMLFormatException
    */
-  protected function _unmarshall(\xml\Node $node) {
+  protected function _unmarshall(Node $node) {
 
     // Simple form: If no subnode indicating the type exists, the type
     // is string, e.g. <value>Test</value>
@@ -54,28 +55,18 @@ class XmlRpcDecoder extends \lang\Object {
         }
         
         if (!isset($ret['__xp_class'])) return $ret;
-        
-        // Check whether this is a XP object. If so, load the class and
-        // create an instance without invoking the constructor.
-        $fields= \lang\XPClass::forName($ret['__xp_class'])->getFields();
-        $cname= array_search($ret['__xp_class'], \xp::$cn, true);
-        $s= ''; $n= 0;
-        foreach ($fields as $field) {
-          if (!isset($ret[$field->getName()])) continue;
-          $m= $field->getModifiers();
-          if ($m & MODIFIER_STATIC) {
-            continue;
-          } else if ($m & MODIFIER_PUBLIC) {
-            $name= $field->getName();
-          } else if ($m & MODIFIER_PROTECTED) {
-            $name= "\0*\0".$field->getName();
-          } else if ($m & MODIFIER_PRIVATE) {
-            $name= "\0".array_search($field->getDeclaringClass()->getName(), \xp::$cn, true)."\0".$field->getName();
-          }
-          $s.= 's:'.strlen($name).':"'.$name.'";'.serialize($ret[$field->getName()]);
-          $n++;
+
+        $class= XPClass::forName($ret['__xp_class']);
+        $instance= $class->newInstance();
+        foreach ($ret as $name => $value) {
+          if (!$class->hasField($name)) continue;
+
+          $field= $class->getField($name);
+          if ($field->getModifiers() & MODIFIER_STATIC) continue;
+
+          $class->getField($name)->setAccessible(true)->set($instance, $value);
         }
-        return unserialize('O:'.strlen($cname).':"'.$cname.'":'.$n.':{'.$s.'}');
+        return $instance;
         
       case 'array':
         $ret= array();
