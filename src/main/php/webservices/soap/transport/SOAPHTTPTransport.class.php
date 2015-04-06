@@ -109,7 +109,7 @@ class SOAPHTTPTransport extends AbstractRpcTransport {
    *
    */
   public function __destruct() {
-    delete($this->_conn);
+    unset($this->_conn);
   }
   
   /**
