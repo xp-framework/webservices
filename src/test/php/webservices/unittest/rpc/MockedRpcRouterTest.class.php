@@ -26,7 +26,7 @@ abstract class MockedRpcRouterTest extends \unittest\TestCase {
    * @param   
    * @return  
    */
-  protected function assertStringContained(\lang\types\String $haystack, \lang\types\String $needle) {
+  protected function assertStringContained($haystack, $needle) {
     if (false === strpos((string)$needle, (string)$haystack)) {
       $this->fail('Expected sub-string not found', $needle, $haystack);
     }

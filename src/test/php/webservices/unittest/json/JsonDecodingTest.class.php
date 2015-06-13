@@ -2,7 +2,6 @@
 
 use unittest\TestCase;
 use util\Date;
-use lang\types\String;
 use webservices\json\JsonDecoder;
 
 /**

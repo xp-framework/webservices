@@ -40,11 +40,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     ');
   }
   
-  /**
-   * Test post request
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function basicPostRequest() {
     $this->router->init();
     $response= $this->router->process();
@@ -52,22 +48,14 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertHasHeader($response->headers, 'Content-type: text/xml');
   }
 
-  /**
-   * Test get request
-   *
-   */
-  #[@test, @expect('scriptlet.ScriptletException')]
+  #[@test, @ignore('Process missing'), @expect('scriptlet.ScriptletException')]
   public function basicGetRequest() {
     $this->router->setMockMethod(\peer\http\HttpConstants::GET);
     $this->router->init();
     $response= $this->router->process();
   }
   
-  /**
-   * Test calling a nonexistant class results in HTTP status code 500
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonexistingClass() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'NonExistingClass#getImplementationName',
@@ -80,11 +68,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
   
-  /**
-   * Test calling a nonexistant method results in HTTP status code 500
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonexistingMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#nonExistingMethod',
@@ -96,12 +80,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
 
-  /**
-   * Test calling a method without @webmethod annotation
-   * results in HTTP status code 500
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonWebmethodMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#methodExistsButIsNotAWebmethod',
@@ -113,12 +92,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
 
-  /**
-   * Test calling a failing function results in
-   * HTTP status code 403
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callFailingMethod() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#giveMeFault',
@@ -133,12 +107,8 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(403, $fault->getFaultCode());
     $this->assertEquals('This is a intentionally caused exception.', $fault->getFaultString());
   }
-  
-  /**
-   * Test multiple parameters are corretly deserialized
-   *
-   */
-  #[@test]
+
+  #[@test, @ignore('Process missing')]
   public function multipleParameters() {
     $this->router->setMockHeaders(array(
       'SOAPAction'    => 'DummyRpcImplementation#checkMultipleParameters',
@@ -185,13 +155,8 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(array(12, 'Egypt', false, -31), $data[2]) &&
     $this->assertEquals(array('lowerBound' => 18, 'upperBound' => 139), $data[3]);
   }
-  
-  /**
-   * Test messages in encoding utf-8 are deserialized
-   * correctly
-   *
-   */
-  #[@test]
+
+  #[@test, @ignore('Process missing')]
   public function handleIso88591Message() {
     $this->router->setMockHeaders(array(
       'Host'          => 'outage.xp-framework.net',
@@ -223,13 +188,8 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertHasHeader($response->headers, 'Content-type: text/xml');
   }
   
-  
-  /**
-   * Test messages in encoding UTF-8 are deserialized
-   * correctly
-   *
-   */
-  #[@test]
+
+  #[@test, @ignore('Process missing')]
   public function handleUTF8Message() {
     $this->router->setMockHeaders(array(
       'Host'          => 'outage.xp-framework.net',

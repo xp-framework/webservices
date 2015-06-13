@@ -2,9 +2,7 @@
 
 use unittest\TestCase;
 use util\Date;
-use lang\types\String;
 use webservices\json\JsonDecoder;
-
 
 /**
  * Testcase for JsonDecoder
@@ -19,6 +17,7 @@ class JsonEncodingTest extends TestCase {
   /**
    * Setup text fixture
    *
+   * @return void
    */
   public function setUp() {
     $this->fixture= new JsonDecoder();
@@ -30,6 +29,7 @@ class JsonEncodingTest extends TestCase {
   /**
    * Tear down test.
    *
+   * @return void
    */
   public function tearDown() {
     date_default_timezone_set($this->tz);
@@ -46,235 +46,131 @@ class JsonEncodingTest extends TestCase {
     return $this->fixture->encode($input);
   }
   
-  /**
-   * Test string encoding
-   *
-   */
   #[@test]
   public function encodeString() {
     $this->assertEquals('"foo"', $this->encode('foo'));
   }
   
-  /**
-   * Test string encoding
-   *
-   */
   #[@test]
   public function encodeUTF8String() {
     $this->assertEquals('"f\u00f6o"', $this->encode('föo'));
   }
 
-  /**
-   * Test String with quotation mark encoding
-   *
-   */
-   #[@test]
-   public function encodeQuotationMarkString() {
-     $this->assertEquals('"f\\"o\\"o"', $this->encode('f"o"o'));
-   }
+  #[@test]
+  public function encodeQuotationMarkString() {
+    $this->assertEquals('"f\\"o\\"o"', $this->encode('f"o"o'));
+  }
 
-   /**
-   * Test String with reverse solidus encoding
-   *
-   */
-   #[@test]
-   public function encodeReverseSolidusString() {
-     $this->assertEquals('"fo\\\\o"', $this->encode('fo\\o'));
-   }
+  #[@test]
+  public function encodeReverseSolidusString() {
+    $this->assertEquals('"fo\\\\o"', $this->encode('fo\\o'));
+  }
 
-   /**
-   * Test String with solidus encoding
-   *
-   */
-   #[@test]
-   public function encodeSolidusString() {
-     $this->assertEquals('"fo\\/o"', $this->encode('fo/o'));
-   }
+  #[@test]
+  public function encodeSolidusString() {
+    $this->assertEquals('"fo\\/o"', $this->encode('fo/o'));
+  }
 
-   /**
-   * Test String with backspace encoding
-   *
-   */
-   #[@test]
-   public function encodeBackspaceString() {
-     $this->assertEquals('"fo\\bo"', $this->encode('fo'."\x08".'o'));
-   }
+  #[@test]
+  public function encodeBackspaceString() {
+    $this->assertEquals('"fo\\bo"', $this->encode('fo'."\x08".'o'));
+  }
 
-   /**
-   * Test String with formfeed encoding
-   *
-   */
-   #[@test]
-   public function encodeFormfeedString() {
-     $this->assertEquals('"fo\\fo"', $this->encode('fo'."\x0c".'o'));
-   }
+  #[@test]
+  public function encodeFormfeedString() {
+    $this->assertEquals('"fo\\fo"', $this->encode('fo'."\x0c".'o'));
+  }
 
-  /**
-   * Test string with newline encoding
-   *
-   */
-   #[@test]
-   public function encodeNewlineString() {
-     $this->assertEquals('"fo\\no"', $this->encode('fo'."\n".'o'));
-   }
+  #[@test]
+  public function encodeNewlineString() {
+    $this->assertEquals('"fo\\no"', $this->encode('fo'."\n".'o'));
+  }
 
-   /**
-   * Test String with carriage return encoding
-   *
-   */
-   #[@test]
-   public function encodeCarriageReturnString() {
-     $this->assertEquals('"fo\\ro"', $this->encode('fo'."\r".'o'));
-   }
+  #[@test]
+  public function encodeCarriageReturnString() {
+    $this->assertEquals('"fo\\ro"', $this->encode('fo'."\r".'o'));
+  }
 
-   /**
-   * Test String with horizontal tab encoding
-   *
-   */
-   #[@test]
-   public function encodeHorizontalTabString() {
-     $this->assertEquals('"fo\\to"', $this->encode('fo'."\t".'o'));
-   }
+  #[@test]
+  public function encodeHorizontalTabString() {
+    $this->assertEquals('"fo\\to"', $this->encode('fo'."\t".'o'));
+  }
 
-  /**
-   * Test positive small integer encoding
-   *
-   */
   #[@test]
   public function encodePositiveSmallInt() {
     $this->assertEquals('1', $this->encode(1));
   }
 
-  /**
-   * Test negative small integer encoding
-   *
-   */
   #[@test]
   public function encodeNegativeSmallInt() {
     $this->assertEquals('-1', $this->encode(-1));
   }
 
-  /**
-   * Test positive big integer encoding
-   *
-   */
   #[@test]
   public function encodePositiveBigInt() {
     $this->assertEquals('2147483647', $this->encode(2147483647));
   }
   
-  /**
-   * Test negative big integer encoding
-   *
-   */
   #[@test]
   public function encodeNegativeBigInt() {
     $this->assertEquals('-2147483647', $this->encode(-2147483647));
   }
 
-  /**
-   * Test integer float encoding
-   *
-   */
   #[@test]
   public function encodeIntegerFloat() {
     $this->assertEquals('1', $this->encode(1.0));
   }
 
-  /**
-   * Test small positive float encoding
-   *
-   */
   #[@test]
   public function encodeSmallPositiveFloat() { 
     $this->assertEquals('1.1', $this->encode(1.1));
   }
   
-  /**
-   * Test small negative float encoding
-   *
-   */
   #[@test]
   public function encodeFloat() { 
     $this->assertEquals('-1.1', $this->encode(-1.1));
   }
 
-  /**
-   * Test big positive float encoding
-   *
-   */
   #[@test]
   public function encodeBigPositiveFloat() { 
     $this->assertEquals('9999999999999.1', $this->encode(9999999999999.1));
   }
 
-  /**
-   * Test big negative float encoding
-   *
-   */
   #[@test]
   public function encodeBigNevativeFloat() { 
     $this->assertEquals('-9999999999999.1', $this->encode(-9999999999999.1));
   }
 
-  /**
-   * Test very small float encoding
-   *
-   */
   #[@test]
   public function encodeVerySmallFloat() { 
     $this->assertEquals('1.0E-11', $this->encode(0.00000000001));
   }
 
-  /**
-   * Test almost very small float encoding
-   *
-   */
   #[@test]
   public function encodeAlmostVerySmallFloat() { 
     $this->assertEquals('0.123456789', $this->encode(0.123456789));
   }
 
-  /**
-   * Test NULL encoding
-   *
-   */
   #[@test]
   public function encodeNull() {
     $this->assertEquals('null', $this->encode(null));
   }
 
-  /**
-   * Test TRUE encoding
-   *
-   */
   #[@test]
   public function encodeTrue() {
     $this->assertEquals('true', $this->encode(true));
   }
 
-  /**
-   * Test FALSE encoding
-   *
-   */
   #[@test]
   public function encodeFalse() {
     $this->assertEquals('false', $this->encode(false));
   }
   
-  /**
-   * Test empty array encoding
-   *
-   */
   #[@test]
   public function encodeEmptyArray() {
     $this->assertEquals('[ ]', $this->encode(array()));
   }
 
-  /**
-   * Test simple numeric array encoding
-   *
-   */
   #[@test]
   public function encodeSimpleNumericArray() {
     $this->assertEquals(
@@ -283,10 +179,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test simple mixed array encoding
-   *
-   */
   #[@test]
   public function encodeSimpleMixedArray() {
     $this->assertEquals(
@@ -295,10 +187,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test normal mixed array encoding
-   *
-   */
   #[@test]
   public function encodeNormalMixedArray() {
     $this->assertEquals(
@@ -307,10 +195,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
      
-  /**
-   * Test simple hashmap encoding
-   *
-   */
   #[@test]
   public function encodeSimpleHashmap() {
     $this->assertEquals(
@@ -319,10 +203,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test complex mixed array encoding
-   *
-   */
   #[@test]
   public function encodeComplexMixedArray() {
     $this->assertEquals(
@@ -331,10 +211,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test complex hashmap encoding
-   *
-   */
   #[@test]
   public function encodeComplexHashmap() {
     $this->assertEquals(
@@ -347,48 +223,19 @@ class JsonEncodingTest extends TestCase {
         "array2" => array(true, "bar" => 4),
         "array3" => array("foo" => array("foo" => "bar"))
       ))
-      );
-  }
-
- /**
-  * Test exception
-  *
-  */
- #[@test]
-  public function encodeFileResource() {
-    $je= null;
-    $file= tmpfile();
-
-    try {
-      $this->encode($file);
-    } catch (\webservices\json\JsonException $je) {
-      // Do nothing here
-    }
-
-    $this->assertInstanceOf(
-      'webservices.json.JsonException',
-      $je
     );
   }
 
-  /**
-   * Additional Tests
-   * 
-   */
+  #[@test, @expect(\webservices\json\JsonException::class)]
+  public function encodeFileResource() {
+    $this->encode(STDERR);
+  }
 
-  /**
-   * Test Array with only one element
-   *
-   */
   #[@test]
   public function encodeOneElementArray() {
     $this->assertEquals('[ "foo" ]', $this->encode(array('foo')));
   }
 
-  /**
-   * Test Object with only one element
-   *
-   */
   #[@test]
   public function encodeOneElementObejct() {
     $this->assertEquals(
@@ -397,58 +244,38 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test encode lang.types.String to Json string
-   *
-   */
   #[@test]
   public function encodeStringObject() {
     $this->assertEquals(
       '"foobar"',
-      $this->encode(new String('foobar'))
+      $this->encode(new \lang\types\String('foobar'))
     );
   }
 
-  /**
-   * Test encode lang.types.String to Json string
-   *
-   */
   #[@test]
   public function encodeStringObjectWithEscape() {
     $this->assertEquals(
       '"foobar\n"',
-      $this->encode(new String("foobar\n"))
+      $this->encode(new \lang\types\String("foobar\n"))
     );
   }
 
-  /**
-   * Test encode lang.types.String to Json string
-   *
-   */
   #[@test]
   public function encodeStringObjectWithUmlat() {
     $this->assertEquals(
       '"E\u00fcro"',
-      $this->encode(new String('Eüro'))
+      $this->encode(new \lang\types\String('Eüro'))
     );
   }
 
-  /**
-   * Test encode lang.types.String to Json string
-   *
-   */
   #[@test]
   public function encodeStringObjectWithEuroSign() {
     $this->assertEquals(
       '"\u20acuro"',
-      $this->encode(new String("\xe2\x82\xacuro", 'utf-8'))
+      $this->encode(new \lang\types\String("\xe2\x82\xacuro", 'utf-8'))
     );
   }
 
-  /**
-   * Test encoding of object
-   *
-   */
   #[@test]
   public function encodeObject() {
     $this->assertEquals(
@@ -459,10 +286,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test encoding of object
-   *
-   */
   #[@test]
   public function encodeObjectWithPrivateProperty() {
     $this->assertEquals(
@@ -474,10 +297,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test encoding of object
-   *
-   */
   #[@test]
   public function encodeObjectWithProtectedProperty() {
     $this->assertEquals(
@@ -489,10 +308,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test encode date object
-   *
-   */
   #[@test]
   public function encodeDateObject() {
     $this->assertEquals(
@@ -501,10 +316,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  /**
-   * Test encode associative array with modified pointer position
-   *
-   */
   #[@test]
   public function encodeAssociativeArrayWithModifiedPointerPosition() {
     $values= array("10" => "first", "15"=>"second", "22"=>"third");

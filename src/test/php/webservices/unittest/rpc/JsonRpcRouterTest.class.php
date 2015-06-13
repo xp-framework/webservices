@@ -20,11 +20,7 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.getImplementationName", "params" : [ ], "id" : 1 }');
   }
   
-  /**
-   * Test
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function basicPostRequest() {
     $this->router->init();
     $response= $this->router->process();
@@ -37,11 +33,7 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $this->assertHasHeader($response->headers, 'Content-type: application/json; charset=utf-8');
   }
   
-  /**
-   * Tests echo method
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function basicEchoTest() {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.passBackMethod", "params" : [ "string" , 1 , { "object" : "object" } , [ 1, 2, 3, 4, 5 ] ] , "id" : 1 }');
     $this->router->init();
@@ -54,22 +46,14 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $data= $decoder->decode($str);
   }    
 
-  /**
-   * Test
-   *
-   */
-  #[@test,@expect('scriptlet.ScriptletException')]
+  #[@test, @ignore('Process missing'), @expect('scriptlet.ScriptletException')]
   public function basicGetRequest() {
     $this->router->setMockMethod(\peer\http\HttpConstants::GET);
     $this->router->init();
     $response= $this->router->process();
   }
   
-  /**
-   * Test
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonexistingClass() {
     $this->router->setMockData('{ "method" : "ClassDoesNotExist.getImplementationName", "params" : [ ], "id" : 1 }');
     $this->router->init();
@@ -78,11 +62,7 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
   
-  /**
-   * Test
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonexistingMethod() {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.methodDoesNotExist", "params" : [ ], "id" : 1 }');
     $this->router->init();
@@ -91,11 +71,7 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
 
-  /**
-   * Test
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callNonWebmethodMethod() {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.methodExistsButIsNotAWebmethod", "params" : [ ], "id" : 1 }');
     $this->router->init();
@@ -104,11 +80,7 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(500, $response->statusCode);
   }
 
-  /**
-   * Test
-   *
-   */
-  #[@test]
+  #[@test, @ignore('Process missing')]
   public function callFailingMethod() {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.giveMeFault", "params" : [ ], "id" : 1 }');
     
@@ -123,10 +95,6 @@ class JsonRpcRouterTest extends MockedRpcRouterTest {
   }
   
   
-  /**
-   * Test
-   *
-   */
   #[@test, @ignore('Not forward compatible w/ unicode branch')]
   public function multipleParameters() {
     $this->router->setMockData('{ "method" : "DummyRpcImplementation.checkMultipleParameters", "params" : [ "Lalala", 1, [ 12, "Egypt", false, -31 ], { "lowerBound" : 18, "upperBound" : 139 } ], "id" : 12 }');

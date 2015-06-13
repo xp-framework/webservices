@@ -1,6 +1,5 @@
 <?php namespace webservices\json;
  
-use lang\types\String;
 use lang\types\Character;
 use io\streams\MemoryOutputStream;
 use io\streams\OutputStream;
@@ -211,7 +210,7 @@ class JsonDecoder extends \lang\Object implements IJsonDecoder {
 
       case 'object': {
         // Converts a string object into an normal json string
-        if ($data instanceof String) {
+        if ($data instanceof \lang\types\String) {
           $stream->write('"'.$this->escape((string)$data->getBytes('utf-8')).'"');
           break;
         }
