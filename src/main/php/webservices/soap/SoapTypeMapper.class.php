@@ -1,13 +1,6 @@
 <?php namespace webservices\soap;
 
 use lang\Type;
-use lang\types\String;
-use lang\types\Short;
-use lang\types\Integer;
-use lang\types\Double;
-use lang\types\Boolean;
-use lang\types\ArrayList;
-
 
 /**
  * Maps primitive or boxed primitives to soap types
@@ -53,8 +46,7 @@ abstract class SoapTypeMapper extends \lang\Object {
   public function box($object) {
     foreach ($this->handler as $class => $handler) {
       if (!$object instanceof $class) continue;
-
-      return call_user_func(array($this, $handler), $object);
+      return call_user_func([$this, $handler], $object);
     }
 
     throw new \lang\IllegalArgumentException('Type '.\xp::typeOf($object).' is not supported.');

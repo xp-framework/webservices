@@ -1,7 +1,6 @@
 <?php namespace webservices\unittest\soap;
 
 use unittest\TestCase;
-use lang\types\Long;
 use webservices\soap\xp\XPSoapNode;
 use webservices\soap\xp\XPSoapMapping;
 use webservices\soap\Parameter;
@@ -9,6 +8,7 @@ use webservices\soap\types\SOAPHashMap;
 use webservices\soap\types\SOAPDateTime;
 use webservices\soap\types\SOAPLong;
 use util\Binford;
+use unittest\actions\RuntimeVersion;
 
 /**
  * TestCase for XPSoapNode class
@@ -41,7 +41,7 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function stringType() {
     $this->assertEquals(
       new XPSoapNode('item', 'my string', array('xsi:type' => 'xsd:string')),
@@ -57,7 +57,7 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function integerType() {
     $this->assertEquals(
       new XPSoapNode('item', 12345, array('xsi:type' => 'xsd:int')),
@@ -73,11 +73,11 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function longType() {
     $this->assertEquals(
       new XPSoapNode('item', '12345', array('xsi:type' => 'xsd:long')),
-      $this->node(new Long(12345))
+      $this->node(new \lang\types\Long(12345))
     );
   }
 

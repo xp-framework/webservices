@@ -3,6 +3,7 @@
 use unittest\TestCase;
 use util\Date;
 use webservices\json\JsonDecoder;
+use unittest\actions\RuntimeVersion;
 
 /**
  * Testcase for JsonDecoder
@@ -244,7 +245,7 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function encodeStringObject() {
     $this->assertEquals(
       '"foobar"',
@@ -252,7 +253,7 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function encodeStringObjectWithEscape() {
     $this->assertEquals(
       '"foobar\n"',
@@ -260,7 +261,7 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function encodeStringObjectWithUmlat() {
     $this->assertEquals(
       '"E\u00fcro"',
@@ -268,7 +269,7 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
   public function encodeStringObjectWithEuroSign() {
     $this->assertEquals(
       '"\u20acuro"',
