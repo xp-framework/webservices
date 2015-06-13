@@ -3,7 +3,7 @@ Webservices for XP Framework ChangeLog
 
 ## ?.?.? / ????-??-??
 
-## 6.0.2 / 2015-06-13
+## 6.1.0 / 2015-06-13
 
 * Added forward compatibility with PHP7 - @thekid
 * Made tests pass on HHVM 3.5 - @thekid
