@@ -14,6 +14,20 @@ use unittest\actions\RuntimeVersion;
  * TestCase for XPSoapNode class
  */
 class XPSoapNodeTest extends TestCase {
+  private static $TZ;
+
+  /** @return void */
+  #[@beforeClass]
+  public static function saveTZ() {
+    self::$TZ= date_default_timezone_get();
+    date_default_timezone_set('Europe/Berlin');
+  }
+
+  /** @return void */
+  #[@afterClass]
+  public static function restoreTZ() {
+    date_default_timezone_set(self::$TZ);
+  }
 
   /**
    * Helper method
