@@ -22,7 +22,7 @@ class XmlRpcClientTest extends TestCase {
    * @return  peer.http.HttpResponse
    */
   protected function newResponse(array $headers, $body= '') {
-    return create(new XmlRpcHttpTransport('http://localhost'))->retrieve(
+    return (new XmlRpcHttpTransport('http://localhost'))->retrieve(
       new HttpResponse(new MemoryInputStream(implode("\r\n", $headers)."\r\n\r\n".trim($body)))
     );
   }

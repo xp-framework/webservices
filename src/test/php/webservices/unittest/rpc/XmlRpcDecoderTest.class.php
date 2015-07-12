@@ -17,7 +17,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    * @return  mixed
    */
   protected function decode($xml) {
-    return create(new XmlRpcDecoder())->decode(
+    return (new XmlRpcDecoder())->decode(
       Tree::fromString('<?xml version="1.0" encoding="utf-8"?><value>'.$xml.'</value>')->root()
     );
   }

@@ -138,7 +138,7 @@ class XPSoapNodeTest extends TestCase {
   #[@test]
   public function simpleHashmap() {
     $this->assertEquals(
-      create(new XPSoapNode('item', null, array('xsi:type' => 'xsd:struct')))
+      (new XPSoapNode('item', null, array('xsi:type' => 'xsd:struct')))
         ->withChild(new XPSoapNode('key', 'value', array('xsi:type' => 'xsd:string'))),
       $this->node(array('key' => 'value'))
     );
@@ -160,7 +160,7 @@ class XPSoapNodeTest extends TestCase {
   #[@test]
   public function simpleArray() {
     $this->assertEquals(
-      create(new XPSoapNode('item', null, array('xsi:type' => 'SOAP-ENC:Array', 'SOAP-ENC:arrayType' => 'xsd:anyType[3]')))
+      (new XPSoapNode('item', null, array('xsi:type' => 'SOAP-ENC:Array', 'SOAP-ENC:arrayType' => 'xsd:anyType[3]')))
         ->withChild(new XPSoapNode('item', 'one', array('xsi:type' => 'xsd:string')))
         ->withChild(new XPSoapNode('item', 'two', array('xsi:type' => 'xsd:string')))
         ->withChild(new XPSoapNode('item', 'three', array('xsi:type' => 'xsd:string'))),
@@ -171,7 +171,7 @@ class XPSoapNodeTest extends TestCase {
   #[@test]
   public function emptyArray() {
     $this->assertEquals(
-      create(new XPSoapNode('item', null, array('xsi:type' => 'xsd:struct', 'xsi:nil' => 'true'))),
+      (new XPSoapNode('item', null, array('xsi:type' => 'xsd:struct', 'xsi:nil' => 'true'))),
       $this->node(array())
     );
   }
@@ -179,7 +179,7 @@ class XPSoapNodeTest extends TestCase {
   #[@test]
   public function simpleObject() {
     $this->assertEquals(
-      create(new XPSoapNode('item', null, array('xmlns:xp' => 'http://xp-framework.net/xmlns/xp', 'xsi:type' => 'xp:util.Binford')))
+      (new XPSoapNode('item', null, array('xmlns:xp' => 'http://xp-framework.net/xmlns/xp', 'xsi:type' => 'xp:util.Binford')))
         ->withChild(new XPSoapNode('poweredBy', 6100, array('xsi:type' => 'xsd:int'))),
       $this->node(new Binford(6100))
     );

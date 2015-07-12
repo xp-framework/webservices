@@ -337,7 +337,7 @@ class JsonParser extends AbstractParser {
   case 16:  #line 57 "src/main/jay/webservices/json/json.jay"
   {
     if (\xp::errorAt(__FILE__)) {
-      $e= new \lang\FormatException('Cannot decode string '.create(new \lang\types\Bytes($yyVals[-2+$yyTop]))->toString().' to '.$this->targetEncoding);
+      $e= new \lang\FormatException('Cannot decode string '.(new \lang\types\Bytes($yyVals[-2+$yyTop]))->toString().' to '.$this->targetEncoding);
       \xp::gc(__FILE__);
       throw $e;
     }

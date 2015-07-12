@@ -17,7 +17,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
    * @return  string
    */
   protected function encode($value) {
-    return create(new XmlRpcEncoder())->encode($value)->getSource(INDENT_NONE);
+    return (new XmlRpcEncoder())->encode($value)->getSource(INDENT_NONE);
   }
   
   /**
