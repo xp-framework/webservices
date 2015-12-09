@@ -210,7 +210,7 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
    * @param   lang.XPClass class
    */
   public function registerMapping(QName $qname, \lang\XPClass $class) {
-    $this->map[$qname->localpart]= \xp::reflect($class->getName());
+    $this->map[$qname->localpart]= $class->literal();
   }
 
   /**
