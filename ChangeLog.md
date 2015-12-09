@@ -5,7 +5,7 @@ Webservices for XP Framework ChangeLog
 
 ## 6.2.0 / 2014-12-09
 
-* Rewrote code to ue `literal()` instead of `xp::reflect()`. See
+* Rewrote code to use `literal()` instead of `xp::reflect()`. See
   xp-framework/rfc#298
   (@thekid)
 * Fixed JsonClient and JsonRpcHttpTransport which were broken on
