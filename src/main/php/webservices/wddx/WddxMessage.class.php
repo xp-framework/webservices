@@ -69,9 +69,9 @@ class WddxMessage extends Tree {
         break;
       
       case 'boolean':
-        $node->addChild(new \xml\Node('boolean', null, array(
+        $node->addChild(new \xml\Node('boolean', null, [
           'value' => $data ? 'true' : 'false'
-        )));
+        ]));
         break;
       
       case 'string':
@@ -86,9 +86,9 @@ class WddxMessage extends Tree {
       case 'array':
         $s= $node->addChild(new \xml\Node('struct'));
         foreach (array_keys($data) as $idx) {
-          $this->_marshall($s->addChild(new \xml\Node('var', null, array(
+          $this->_marshall($s->addChild(new \xml\Node('var', null, [
             'name'  => $idx
-          ))), $data[$idx]);
+          ])), $data[$idx]);
         }
         break;
       
@@ -110,7 +110,7 @@ class WddxMessage extends Tree {
    * @throws  lang.IllegalStateException if no payload data could be found in the message
    */
   public function getData() {
-    $ret= array();
+    $ret= [];
     foreach (array_keys($this->root()->getChildren()) as $idx) {
       if ('header' == $this->root()->nodeAt($idx)->getName())
         continue;
@@ -154,14 +154,14 @@ class WddxMessage extends Tree {
         return;
       
       case 'array':
-        $arr= array();
+        $arr= [];
         foreach (array_keys($node->getChildren()) as $idx) {
           $arr[]= $this->_unmarshall($node->nodeAt($idx));
         }
         return $arr;
       
       case 'struct':
-        $struct= array();
+        $struct= [];
         foreach (array_keys($node->getChildren()) as $idx) {
           $struct[$node->nodeAt($idx)->getAttribute('name')]= $this->_unmarshall($node->nodeAt($idx));
         }

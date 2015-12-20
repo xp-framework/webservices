@@ -49,11 +49,11 @@ class JsonRequestMessage extends JsonMessage {
    * @param   var data
    */
   public function setData($data) {
-    $this->data= array(
+    $this->data= [
       'method'  => $this->method,
       'params'  => (array)$data,
       'id'      => $this->id
-    );
+    ];
   }
   
   /**

@@ -8,9 +8,9 @@ use webservices\soap\rpc\SoapRpcRouter;
  */
 class SoapRpcRouterMock extends SoapRpcRouter {
   public
-    $headers= array(),
+    $headers= [],
     $method=  '',
-    $params=  array(),
+    $params=  [],
     $data=    '';
     
   /**

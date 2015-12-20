@@ -1,5 +1,8 @@
 <?php namespace webservices\unittest\rpc;
 
+use lang\FormatException;
+use lang\IllegalAccessException;
+use lang\IllegalStateException;
 use unittest\TestCase;
 use io\streams\MemoryInputStream;
 use peer\http\HttpResponse;
@@ -33,7 +36,7 @@ class XmlRpcClientTest extends TestCase {
    */
   #[@test]
   public function stringAnswer() {
-    $response= $this->newResponse(array('HTTP/1.0 200 OK', 'Content-Type: text/xml'), '
+    $response= $this->newResponse(['HTTP/1.0 200 OK', 'Content-Type: text/xml'], '
       <?xml version="1.0" encoding="iso-8859-1"?>
       <methodResponse>
         <params>
@@ -53,9 +56,9 @@ class XmlRpcClientTest extends TestCase {
    * Test an empty response
    *
    */
-  #[@test, @expect('lang.FormatException')]
+  #[@test, @expect(FormatException::class)]
   public function emptyResponse() {
-    $response= $this->newResponse(array('HTTP/1.0 200 OK', 'Content-Type: text/xml'), '
+    $response= $this->newResponse(['HTTP/1.0 200 OK', 'Content-Type: text/xml'], '
       <?xml version="1.0" encoding="iso-8859-1"?>
       <methodResponse/>
     ');
@@ -67,9 +70,9 @@ class XmlRpcClientTest extends TestCase {
    * Test a 401 response
    *
    */
-  #[@test, @expect('lang.IllegalAccessException')]
+  #[@test, @expect(IllegalAccessException::class)]
   public function unauthorized() {
-    $this->newResponse(array('HTTP/1.0 401 Unauthorized', 'Content-Type: text/html'), '
+    $this->newResponse(['HTTP/1.0 401 Unauthorized', 'Content-Type: text/html'], '
       <html><head>401</head><body><h1>401 Unauthorized</h1></body></html>
     ');
   }
@@ -78,9 +81,9 @@ class XmlRpcClientTest extends TestCase {
    * Test a 302 response
    *
    */
-  #[@test, @expect('lang.IllegalStateException')]
+  #[@test, @expect(IllegalStateException::class)]
   public function redirect() {
-    $this->newResponse(array('HTTP/1.0 302 Moved Temporarily', 'Location: http://example.com'));
+    $this->newResponse(['HTTP/1.0 302 Moved Temporarily', 'Location: http://example.com']);
   }
 
   /**
@@ -90,7 +93,7 @@ class XmlRpcClientTest extends TestCase {
   #[@test]
   public function fault() {
     try {
-      $this->newResponse(array('HTTP/1.0 500 Internal Server error', 'Content-Type: text/xml'), '
+      $this->newResponse(['HTTP/1.0 500 Internal Server error', 'Content-Type: text/xml'], '
         <?xml version="1.0" encoding="iso-8859-1"?>
         <methodResponse>
           <fault>

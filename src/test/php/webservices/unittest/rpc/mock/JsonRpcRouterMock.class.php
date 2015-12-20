@@ -8,9 +8,9 @@ use webservices\json\rpc\JsonRpcRouter;
  */
 class JsonRpcRouterMock extends JsonRpcRouter {
   public
-    $headers= array(),
+    $headers= [],
     $method=  '',
-    $params=  array(),
+    $params=  [],
     $data=    '';
     
   /**

@@ -40,7 +40,7 @@ class SoapClientTest extends TestCase {
     
     $client= new XPSoapClient('http://xp-framework.net/', 'urn://test');
     $client->setTransport($transport);
-    $this->assertEquals(array(null, null), $client->invoke('irrelevant'));
+    $this->assertEquals([null, null], $client->invoke('irrelevant'));
   }
 
   /**
@@ -133,7 +133,7 @@ class SoapClientTest extends TestCase {
     
     $client= new XPSoapClient('http://xp-framework.net/', 'urn://test');
     $client->setTransport($transport);
-    $this->assertEquals(array('first value', 'second value'), $client->invoke('irrelevant'));
+    $this->assertEquals(['first value', 'second value'], $client->invoke('irrelevant'));
   }
 
   /**
@@ -167,9 +167,9 @@ class SoapClientTest extends TestCase {
     
     $client= new XPSoapClient('http://xp-framework.net/', 'urn://test');
     $client->setTransport($transport);
-    $this->assertEquals(array(
-      'string' => array('first value', 'second value')
-    ), $client->invoke('irrelevant'));
+    $this->assertEquals([
+      'string' => ['first value', 'second value']
+    ], $client->invoke('irrelevant'));
   }
 
   /**
@@ -205,12 +205,12 @@ class SoapClientTest extends TestCase {
     
     $client= new XPSoapClient('http://xp-framework.net/', 'urn://test');
     $client->setTransport($transport);
-    $this->assertEquals(array(
+    $this->assertEquals([
       'scalar' => 'some string',
-      'array' => array(
-        'string' => array('first value', 'second value')
-      )
-    ), $client->invoke('irrelevant'));
+      'array' => [
+        'string' => ['first value', 'second value']
+      ]
+    ], $client->invoke('irrelevant'));
   }
 
   /**

@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\rpc;
 
+use lang\IllegalArgumentException;
 use xml\Tree;
 use webservices\xmlrpc\XmlRpcDecoder;
 
@@ -110,8 +111,8 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function emptyArray() {
-    $this->assertEquals(array(), $this->decode('<array><data></data></array>'), 'long form');
-    $this->assertEquals(array(), $this->decode('<array><data/></array>'), 'short form');
+    $this->assertEquals([], $this->decode('<array><data></data></array>'), 'long form');
+    $this->assertEquals([], $this->decode('<array><data/></array>'), 'short form');
   }
 
   /**
@@ -120,7 +121,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function oneElementArray() {
-    $this->assertEquals(array(1), $this->decode('
+    $this->assertEquals([1], $this->decode('
       <array>
         <data>
           <value><i4>1</i4></value>
@@ -136,7 +137,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function exampleArray() {
-    $this->assertEquals(array(12, 'Egypt', false, -31), $this->decode('
+    $this->assertEquals([12, 'Egypt', false, -31], $this->decode('
       <array>
         <data>
           <value><i4>12</i4></value>
@@ -154,8 +155,8 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function emptyStruct() {
-    $this->assertEquals(array(), $this->decode('<struct></struct>'), 'long form');
-    $this->assertEquals(array(), $this->decode('<struct/>'), 'short form');
+    $this->assertEquals([], $this->decode('<struct></struct>'), 'long form');
+    $this->assertEquals([], $this->decode('<struct/>'), 'short form');
   }
 
   /**
@@ -165,7 +166,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function exampleStruct() {
-    $this->assertEquals(array('lowerBound' => 18, 'upperBound' => 139), $this->decode('
+    $this->assertEquals(['lowerBound' => 18, 'upperBound' => 139], $this->decode('
       <struct>
         <member>
           <name>lowerBound</name>
@@ -309,7 +310,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    * Test decoding unsupported types will raise an exception.
    *
    */
-  #[@test, @expect('lang.IllegalArgumentException')]
+  #[@test, @expect(IllegalArgumentException::class)]
   public function unsupported() {
     $this->decode('<not_a_type>any-value</not_a_type>');
   }
@@ -322,7 +323,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
   #[@test]
   public function nodeWithoutTypeSubNodeIsString() {
     $this->assertEquals(
-      array('Test'), 
+      ['Test'], 
       $this->decode('<array><data><value>Test</value></data></array>'
     ));
   }

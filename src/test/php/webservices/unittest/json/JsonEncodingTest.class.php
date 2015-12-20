@@ -169,14 +169,14 @@ class JsonEncodingTest extends TestCase {
   
   #[@test]
   public function encodeEmptyArray() {
-    $this->assertEquals('[ ]', $this->encode(array()));
+    $this->assertEquals('[ ]', $this->encode([]));
   }
 
   #[@test]
   public function encodeSimpleNumericArray() {
     $this->assertEquals(
       '[ 1 , 2 , 3 ]',
-      $this->encode(array(1, 2, 3))
+      $this->encode([1, 2, 3])
     );
   }
 
@@ -184,7 +184,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeSimpleMixedArray() {
     $this->assertEquals(
       '[ "foo" , 2 , "bar" ]',
-      $this->encode(array('foo', 2, 'bar'))
+      $this->encode(['foo', 2, 'bar'])
     );
   }
 
@@ -192,7 +192,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeNormalMixedArray() {
     $this->assertEquals(
       '[ "foo" , 0.001 , false , [ 1 , 2 , 3 ] ]',
-      $this->encode(array('foo', 0.001, false, array(1, 2, 3)))
+      $this->encode(['foo', 0.001, false, [1, 2, 3]])
     );
   }
      
@@ -200,7 +200,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeSimpleHashmap() {
     $this->assertEquals(
       '{ "foo" : "bar" , "bar" : "baz" }',
-      $this->encode(array('foo' => 'bar', 'bar' => 'baz'))
+      $this->encode(['foo' => 'bar', 'bar' => 'baz'])
     );
   }
 
@@ -208,7 +208,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeComplexMixedArray() {
     $this->assertEquals(
      '[ "foo" , true , { "foo" : "bar" , "0" : 2 } ]',
-     $this->encode(array('foo', true, array('foo' => 'bar', 2)))
+     $this->encode(['foo', true, ['foo' => 'bar', 2]])
     );
   }
 
@@ -217,13 +217,13 @@ class JsonEncodingTest extends TestCase {
     $this->assertEquals(
       '{ "foo" : "bar" , "3" : 0.123 , "4" : false , "array" : [ 1 , "foo" , false ] , '.
       '"array2" : { "0" : true , "bar" : 4 } , "array3" : { "foo" : { "foo" : "bar" } } }',
-      $this->encode(array('foo' => 'bar',
+      $this->encode(['foo' => 'bar',
         3 => 0.123,
         false,
-        "array" => array(1, "foo", false),
-        "array2" => array(true, "bar" => 4),
-        "array3" => array("foo" => array("foo" => "bar"))
-      ))
+        "array" => [1, "foo", false],
+        "array2" => [true, "bar" => 4],
+        "array3" => ["foo" => ["foo" => "bar"]]
+      ])
     );
   }
 
@@ -234,14 +234,14 @@ class JsonEncodingTest extends TestCase {
 
   #[@test]
   public function encodeOneElementArray() {
-    $this->assertEquals('[ "foo" ]', $this->encode(array('foo')));
+    $this->assertEquals('[ "foo" ]', $this->encode(['foo']));
   }
 
   #[@test]
   public function encodeOneElementObejct() {
     $this->assertEquals(
       '{ "foo" : "bar" }',
-      $this->encode(array('foo' => 'bar'))
+      $this->encode(['foo' => 'bar'])
     );
   }
 
@@ -281,7 +281,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObject() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', array(), '{
+      $this->encode(newinstance('lang.Object', [], '{
         public $prop= "prop";
       }'))
     );
@@ -291,7 +291,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObjectWithPrivateProperty() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', array(), '{
+      $this->encode(newinstance('lang.Object', [], '{
         public $prop= "prop";
         private $priv= "priv";
       }'))
@@ -302,7 +302,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObjectWithProtectedProperty() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', array(), '{
+      $this->encode(newinstance('lang.Object', [], '{
         public $prop= "prop";
         protected $prot= "prot";
       }'))
@@ -319,7 +319,7 @@ class JsonEncodingTest extends TestCase {
 
   #[@test]
   public function encodeAssociativeArrayWithModifiedPointerPosition() {
-    $values= array("10" => "first", "15"=>"second", "22"=>"third");
+    $values= ["10" => "first", "15"=>"second", "22"=>"third"];
     next($values);
 
     $this->assertEquals(

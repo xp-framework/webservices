@@ -127,14 +127,14 @@ class JsonMessage extends \lang\Object implements AbstractRpcMessage {
    * @param   string faultString
    */
   public function setFault($faultCode, $faultString) {
-    $this->data= array(
+    $this->data= [
       'result'  => false,
-      'error'   => array(
+      'error'   => [
         'faultCode'   => $faultCode,
         'faultString' => $faultString
-      ),
+      ],
       'id'      => null
-    );
+    ];
   }
   
   /**

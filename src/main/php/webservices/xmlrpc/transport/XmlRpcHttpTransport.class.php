@@ -15,7 +15,7 @@ use peer\http\HttpConstants;
 class XmlRpcHttpTransport extends AbstractRpcTransport {
   public
     $_conn    = null,
-    $_headers = array();
+    $_headers = [];
   
   /**
    * Constructor.
@@ -23,7 +23,7 @@ class XmlRpcHttpTransport extends AbstractRpcTransport {
    * @param   string url
    * @param   array headers
    */
-  public function __construct($url, $headers= array()) {
+  public function __construct($url, $headers= []) {
     $this->_conn= new HttpConnection($url);
     $this->_headers= $headers;
   }

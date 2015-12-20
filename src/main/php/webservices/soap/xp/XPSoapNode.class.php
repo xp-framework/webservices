@@ -24,10 +24,10 @@ class XPSoapNode extends Node {
    * @return  string typename, e.g. "xsd:string"
    */
   protected function _typeName($content) {
-    static $tmap= array(      // Mapping PHP-typename => SOAP-typename
+    static $tmap= [      // Mapping PHP-typename => SOAP-typename
       'double'        => 'float',
       'integer'       => 'int'
-    );
+    ];
     
     $t= gettype($content);
     if (isset($tmap[$t])) $t= $tmap[$t];

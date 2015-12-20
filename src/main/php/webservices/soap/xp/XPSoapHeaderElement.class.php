@@ -44,7 +44,7 @@ class XPSoapHeaderElement extends \lang\Object implements XPSoapHeader {
    * @return  xml.Node
    */
   public function getNode($ns) {
-    $attr= array();
+    $attr= [];
     if ($this->mustUnderstand) $attr[$ns[XMLNS_SOAPENV].':mustUnderstand']= 1;
     if ($this->actor) $attr[$ns[XMLNS_SOAPENV].':actor']= $this->actor;
     if ($this->encodingStyle) $attr[$ns[XMLNS_SOAPENV].':encodingStyle']= $this->encodingStyle;

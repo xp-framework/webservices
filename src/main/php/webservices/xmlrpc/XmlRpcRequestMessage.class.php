@@ -63,7 +63,7 @@ class XmlRpcRequestMessage extends XmlRpcMessage {
    * @return  var
    */
   public function getData() {
-    $ret= array();
+    $ret= [];
     foreach (array_keys($this->tree->root()->getChildren()) as $idx) {
       if ('params' != $this->tree->root()->nodeAt($idx)->getName())
         continue;

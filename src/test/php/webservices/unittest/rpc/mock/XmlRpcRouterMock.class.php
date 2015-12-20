@@ -9,9 +9,9 @@ use peer\http\HttpConstants;
  */
 class XmlRpcRouterMock extends XmlRpcRouter {
   public
-    $headers= array(),
+    $headers= [],
     $method=  '',
-    $params=  array(),
+    $params=  [],
     $data=    '';
     
   /**

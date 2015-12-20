@@ -51,12 +51,12 @@ class DummyRpcImplementationHandler extends \lang\Object {
     if (!is_array($array)) throw new \lang\IllegalArgumentException('Array not array');
     if (!is_array($struct)) throw new \lang\IllegalArgumentException('Struct not struct');
     
-    return array(
+    return [
       $string,
       $int,
       $array,
       $struct
-    );
+    ];
   }
   
   /**

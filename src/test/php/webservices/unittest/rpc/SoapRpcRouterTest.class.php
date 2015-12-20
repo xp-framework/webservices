@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\rpc;
 
+use scriptlet\ScriptletException;
 use webservices\soap\xp\XPSoapMessage;
 use webservices\unittest\rpc\mock\SoapRpcRouterMock;
 
@@ -19,10 +20,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   public function setUp() {
     $this->router= new SoapRpcRouterMock('webservices.unittest.rpc.impl');
     $this->router->setMockMethod(\peer\http\HttpConstants::POST);
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'DummyRpcImplementation#getImplementationName',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <SOAP-ENV:Envelope
        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
@@ -48,7 +49,7 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertHasHeader($response->headers, 'Content-type: text/xml');
   }
 
-  #[@test, @ignore('Process missing'), @expect('scriptlet.ScriptletException')]
+  #[@test, @ignore('Process missing'), @expect(ScriptletException::class)]
   public function basicGetRequest() {
     $this->router->setMockMethod(\peer\http\HttpConstants::GET);
     $this->router->init();
@@ -57,10 +58,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   
   #[@test, @ignore('Process missing')]
   public function callNonexistingClass() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'NonExistingClass#getImplementationName',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     
     $this->router->init();
     $response= $this->router->process();
@@ -70,10 +71,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
   
   #[@test, @ignore('Process missing')]
   public function callNonexistingMethod() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'DummyRpcImplementation#nonExistingMethod',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     $this->router->init();
     $response= $this->router->process();
     
@@ -82,10 +83,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
 
   #[@test, @ignore('Process missing')]
   public function callNonWebmethodMethod() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'DummyRpcImplementation#methodExistsButIsNotAWebmethod',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     $this->router->init();
     $response= $this->router->process();
     
@@ -94,10 +95,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
 
   #[@test, @ignore('Process missing')]
   public function callFailingMethod() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'DummyRpcImplementation#giveMeFault',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     $this->router->init();
     $response= $this->router->process();
     $this->assertEquals(500, $response->statusCode);
@@ -110,10 +111,10 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
 
   #[@test, @ignore('Process missing')]
   public function multipleParameters() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'SOAPAction'    => 'DummyRpcImplementation#checkMultipleParameters',
       'Content-Type'  => 'text/xml; charset=utf-8'
-    ));
+    ]);
     $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
 <SOAP-ENV:Envelope
  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
@@ -152,19 +153,19 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     
     $this->assertEquals('Lalala', $data[0]) &&
     $this->assertEquals(1, $data[1]) &&
-    $this->assertEquals(array(12, 'Egypt', false, -31), $data[2]) &&
-    $this->assertEquals(array('lowerBound' => 18, 'upperBound' => 139), $data[3]);
+    $this->assertEquals([12, 'Egypt', false, -31], $data[2]) &&
+    $this->assertEquals(['lowerBound' => 18, 'upperBound' => 139], $data[3]);
   }
 
   #[@test, @ignore('Process missing')]
   public function handleIso88591Message() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'Host'          => 'outage.xp-framework.net',
       'Connection'    => 'Keep-Alive',
       'Content-Type'  => 'text/xml; charset=utf-8',
       'SOAPAction'    => 'DummyRpcImplementation#checkUTF8Content',
       'User-Agent'    => 'PHP SOAP 0.1'
-    ));
+    ]);
     $this->router->setMockData('<?xml version="1.0" encoding="utf-8"?>
       <SOAP-ENV:Envelope 
        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -191,13 +192,13 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
 
   #[@test, @ignore('Process missing')]
   public function handleUTF8Message() {
-    $this->router->setMockHeaders(array(
+    $this->router->setMockHeaders([
       'Host'          => 'outage.xp-framework.net',
       'Connection'    => 'Keep-Alive',
       'Content-Type'  => 'text/xml; charset=utf-8',
       'SOAPAction'    => 'DummyRpcImplementation#checkUTF8Content',
       'User-Agent'    => 'PHP SOAP 0.1'
-    ));
+    ]);
     $this->router->setMockData('<?xml version="1.0" encoding="UTF-8"?>
       <SOAP-ENV:Envelope 
        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 

@@ -20,7 +20,7 @@ class XPSoapClient extends \lang\Object implements ISoapClient, Traceable {
     $action             = '',
     $targetNamespace    = null,
     $mapping            = null,
-    $headers            = array();
+    $headers            = [];
 
   static function __static() {
 
@@ -58,7 +58,7 @@ class XPSoapClient extends \lang\Object implements ISoapClient, Traceable {
    * @return  mixed
    */
   public function __get($key) {
-    if (in_array($key, array('transport', 'encoding', 'action', 'targetNamespace', 'mapping', 'headers'))) {
+    if (in_array($key, ['transport', 'encoding', 'action', 'targetNamespace', 'mapping', 'headers'])) {
       trigger_error('Direct use of XPSoapClient member "'.$key.'" is discouraged.', E_USER_DEPRECATED);
       return $this->{$key};
     }

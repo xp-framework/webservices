@@ -11,8 +11,8 @@ use xml\Node;
  */
 class FindBusinessesCommand extends \lang\Object implements InquiryCommand {
   public
-    $names            = array(),
-    $findQualifiers   = array(),
+    $names            = [],
+    $findQualifiers   = [],
     $maxRows          = 0;
 
   /**
@@ -24,7 +24,7 @@ class FindBusinessesCommand extends \lang\Object implements InquiryCommand {
    */
   public function __construct(
     $names, 
-    $findQualifiers= array(), 
+    $findQualifiers= [], 
     $maxRows= 0
   ) {
     $this->names= $names;

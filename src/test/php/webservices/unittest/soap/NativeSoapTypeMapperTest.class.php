@@ -20,7 +20,7 @@ class NativeSoapTypeMapperTest extends TestCase {
    */
   public function setUp() {
     if (!\lang\Runtime::getInstance()->extensionAvailable('soap')) {
-      throw new \unittest\PrerequisitesNotMetError('PHP Soap extension not available', null, array('ext/soap'));
+      throw new \unittest\PrerequisitesNotMetError('PHP Soap extension not available', null, ['ext/soap']);
     }
 
     $this->fixture= new NativeSoapTypeMapper();

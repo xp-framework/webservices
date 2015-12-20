@@ -12,10 +12,10 @@ use xml\QName;
  */
 class XPSoapMapping extends \lang\Object {
   public
-    $_classes     = array(),
-    $_qnames      = array(),
-    $_q2c         = array(),
-    $_c2q         = array();
+    $_classes     = [],
+    $_qnames      = [],
+    $_q2c         = [],
+    $_c2q         = [];
     
   /**
    * Register a new mapping.

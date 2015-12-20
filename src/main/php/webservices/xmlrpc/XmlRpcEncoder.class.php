@@ -53,10 +53,10 @@ class XmlRpcEncoder extends \lang\Object {
     } else if ($data instanceof \lang\Generic) {
 
       $n= $value->addChild(new Node('struct'));
-      $n->addChild(Node::fromArray(array(
+      $n->addChild(Node::fromArray([
         'name'  => '__xp_class',
-        'value' => array('string' => $data->getClassName())
-      ), 'member'));
+        'value' => ['string' => $data->getClassName()]
+      ], 'member'));
       
       foreach ($data->getClass()->getFields() as $field) {
         if ($field->getModifiers() & MODIFIER_STATIC) continue;

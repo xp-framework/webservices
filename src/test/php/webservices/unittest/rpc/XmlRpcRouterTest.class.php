@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\rpc;
 
+use scriptlet\ScriptletException;
 use webservices\unittest\rpc\mock\XmlRpcRouterMock;
 
 /**
@@ -36,7 +37,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals('webservices.unittest.rpc.impl.DummyRpcImplementationHandler', $msg->getData());
   }
 
-  #[@test, @ignore('Process missing'), @expect('scriptlet.ScriptletException')]
+  #[@test, @ignore('Process missing'), @expect(ScriptletException::class)]
   public function basicGetRequest() {
     $this->router->setMockMethod(\peer\http\HttpConstants::GET);
     $this->router->init();
@@ -162,7 +163,7 @@ class XmlRpcRouterTest extends MockedRpcRouterTest {
     $data= $msg->getData();
     $this->assertEquals('Lalala', $data[0]);
     $this->assertEquals(1, $data[1]);
-    $this->assertEquals(array(12, 'Egypt', false, -31), $data[2]);
-    $this->assertEquals(array('lowerBound' => 18, 'upperBound' => 139), $data[3]);
+    $this->assertEquals([12, 'Egypt', false, -31], $data[2]);
+    $this->assertEquals(['lowerBound' => 18, 'upperBound' => 139], $data[3]);
   }
 }

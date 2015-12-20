@@ -30,7 +30,7 @@ class SOAPHTTPTransport extends AbstractRpcTransport {
     $_conn        = null,
     $_action      = '',
     $_actiontype  = null,
-    $_headers     = array();
+    $_headers     = [];
     
   /**
    * Constructor
@@ -39,10 +39,10 @@ class SOAPHTTPTransport extends AbstractRpcTransport {
    * @param   array headers default array()
    * @param   int actiontype
    */  
-  public function __construct($url, $headers= array(), $actiontype= self::ACTION_COMPUTE) {
+  public function __construct($url, $headers= [], $actiontype= self::ACTION_COMPUTE) {
     $this->_conn= new HttpConnection($url);
     $this->_headers= array_merge(
-      array('User-Agent' => 'XP-Framework SOAP Client (http://xp-framework.net)'),
+      ['User-Agent' => 'XP-Framework SOAP Client (http://xp-framework.net)'],
       $headers
     );
     $this->_actiontype= $actiontype;

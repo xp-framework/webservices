@@ -99,7 +99,7 @@ class JsonDecoder extends \lang\Object implements IJsonDecoder {
    * @return  string
    */
   protected function escape($in) {
-    static $ctrl= array(
+    static $ctrl= [
       34 => '\\"', 
       92 => '\\\\', 
       47 => '\\/', 
@@ -108,7 +108,7 @@ class JsonDecoder extends \lang\Object implements IJsonDecoder {
       10 => '\\n', 
       13 => '\\r', 
        9 => '\\t'
-    );
+    ];
     
     $out= '';
     for ($i= 0, $s= strlen($in); $i < $s; $i++) {
@@ -220,7 +220,7 @@ class JsonDecoder extends \lang\Object implements IJsonDecoder {
           if (!method_exists($data, '__sleep')) {
             $vars= get_object_vars($data);
           } else {
-            $vars= array();
+            $vars= [];
             foreach ($data->__sleep() as $var) $vars[$var]= $data->{$var};
           }
           

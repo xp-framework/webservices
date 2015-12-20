@@ -38,7 +38,7 @@ use peer\http\HttpConstants;
 class UDDIServer extends \lang\Object implements Traceable {
   public
     $cat      = null,
-    $conn     = array(),
+    $conn     = [],
     $version  = 0;
 
   /**
@@ -96,14 +96,14 @@ class UDDIServer extends \lang\Object implements Traceable {
     // Create message
     with ($m= new XPSoapMessage()); {
       $m->encoding= 'utf-8';
-      $m->root= new \xml\Node('soap:Envelope', null, array(
+      $m->root= new \xml\Node('soap:Envelope', null, [
         'xmlns:soap' => 'http://schemas.xmlsoap.org/soap/envelope/'
-      ));
+      ]);
       $body= $m->root()->addChild(new \xml\Node('soap:Body'));
-      $command->marshalTo($body->addChild(new \xml\Node('command', null, array(
+      $command->marshalTo($body->addChild(new \xml\Node('command', null, [
         'xmlns'      => UDDIConstants::namespaceFor($this->version),
         'generic'    => UDDIConstants::versionIdFor($this->version)
-      ))));
+      ])));
     }
     
     // Assemble request

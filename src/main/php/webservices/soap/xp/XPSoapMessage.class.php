@@ -51,13 +51,13 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
     $method       = '';
 
   public 
-    $namespaces   = array(
+    $namespaces   = [
       XMLNS_SOAPENV     => 'SOAP-ENV',
       XMLNS_XSD         => 'xsd',
       XMLNS_XSI         => 'xsi',
       XMLNS_SOAPENC     => 'SOAP-ENC',
       XMLNS_SOAPINTEROP => 'si'
-    );
+    ];
 
   /**
    * Constructor
@@ -77,11 +77,11 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
    * @param   string targetNamespace default NULL
    * @param   webservices.soap.xp.XPSoapHeader[] headers default array()
    */
-  public function createCall($action, $method, $targetNamespace= null, $headers= array()) {
+  public function createCall($action, $method, $targetNamespace= null, $headers= []) {
     $this->action= $action;
     $this->method= $method;
 
-    $this->root= new Node('SOAP-ENV:Envelope', null, array(
+    $this->root= new Node('SOAP-ENV:Envelope', null, [
       'xmlns:SOAP-ENV'              => XMLNS_SOAPENV,
       'xmlns:xsd'                   => XMLNS_XSD,
       'xmlns:xsi'                   => XMLNS_XSI,
@@ -89,7 +89,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
       'xmlns:si'                    => XMLNS_SOAPINTEROP,
       'SOAP-ENV:encodingStyle'      => XMLNS_SOAPENC,
       'xmlns:'.$this->namespace     => (null !== $targetNamespace ? $targetNamespace : $this->action)
-    ));
+    ]);
     
     if (!empty($headers)) {
       $header= $this->root()->addChild(new Node('SOAP-ENV:Header'));
@@ -113,14 +113,14 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
       $this->method= $msg->method;
     }
 
-    $ns= array(
+    $ns= [
       'xmlns:SOAP-ENV'              => XMLNS_SOAPENV,
       'xmlns:xsd'                   => XMLNS_XSD,
       'xmlns:xsi'                   => XMLNS_XSI,
       'xmlns:SOAP-ENC'              => XMLNS_SOAPENC,
       'xmlns:si'                    => XMLNS_SOAPINTEROP,
       'SOAP-ENV:encodingStyle'      => XMLNS_SOAPENC
-    );
+    ];
     
     if ($this->action) $ns['xmlns:'.$this->namespace]= $this->action;
     $this->root= new Node('SOAP-ENV:Envelope', null, $ns);
@@ -215,7 +215,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
       $regs
     )) {
       // E.g.: SOAP-ENV:Fault
-      $regs= array(0, 'xsd', 'string');
+      $regs= [0, 'xsd', 'string'];
     }
 
     // SOAP-ENC:arrayType="xsd:anyType[4]"
@@ -348,7 +348,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
    */    
   protected function _recurseData($node, $names= false, $context= null) {
     if (!$node->hasChildren()) {
-      $a= array();
+      $a= [];
       return $a;
     }
 
@@ -357,7 +357,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
       $this->namespaces[$val]= substr($key, 6);
     }
     
-    $results= array();
+    $results= [];
     for ($i= 0, $s= sizeof($node->getChildren()); $i < $s; $i++) {
       $key= $i;
       if ($names) {
@@ -372,7 +372,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
         // Convert result to array in case it's not an array already
         // or - if it's already an array - check for numeric array key
         // to make sure it's not an array generated from an object/struct
-        if (!is_array($results[$key]) || !isset($results[$key][0])) $results[$key]= array($results[$key]);
+        if (!is_array($results[$key]) || !isset($results[$key][0])) $results[$key]= [$results[$key]];
 
         $results[$key][]= $this->unmarshall(
           $node->nodeAt($i),
@@ -509,7 +509,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
         $this->namespaces[XMLNS_SOAPENV].':Fault'
       )) return null;
 
-      $return= $this->_recurseData($body->nodeAt(0), true, 'OBJECT', array());
+      $return= $this->_recurseData($body->nodeAt(0), true, 'OBJECT', []);
       // DEBUG Console::writeLine('RETURN >>> ', var_export($return, 1), '***'); // DEBUG
       return new CommonSoapFault(
         isset($return['faultcode'])   ? $return['faultcode']    : '',
@@ -556,7 +556,7 @@ class XPSoapMessage extends Tree implements AbstractRpcMessage {
     if (!($h= $this->_headerElement())) return null;
     
     // Go through all children
-    $headers= array();
+    $headers= [];
     foreach (array_keys($h->getChildren()) as $idx) {
       $headers[]= XPSoapHeaderElement::fromNode(
         $h->nodeAt($idx),

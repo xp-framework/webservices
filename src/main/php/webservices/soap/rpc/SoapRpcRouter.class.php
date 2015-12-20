@@ -87,6 +87,6 @@ class SoapRpcRouter extends AbstractRpcRouter {
    * @throws  lang.IllegalAccessException for non-public methods
    */
   public function callReflectHandler($msg) {
-    return array(parent::callReflectHandler($msg));
+    return [parent::callReflectHandler($msg)];
   }   
 }

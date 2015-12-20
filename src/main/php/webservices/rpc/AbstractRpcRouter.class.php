@@ -73,7 +73,7 @@ abstract class AbstractRpcRouter extends HttpScriptlet implements Traceable {
    * @return  string[]
    */
   public function formatStackTrace($elements) {
-    $stacktrace= array();
+    $stacktrace= [];
     $replace= str_repeat('¿', strlen(Node::XML_ILLEGAL_CHARS));
     for ($i= 0, $s= sizeof($elements); $i < $s; $i++) {
       $stacktrace[]= strtr($elements[$i]->toString(), Node::XML_ILLEGAL_CHARS, $replace);

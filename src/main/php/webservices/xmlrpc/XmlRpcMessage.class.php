@@ -108,7 +108,7 @@ class XmlRpcMessage extends \lang\Object implements AbstractRpcMessage {
    * @return  var
    */
   public function getData() {
-    $ret= array();
+    $ret= [];
     foreach (array_keys($this->tree->root()->getChildren()) as $idx) {
       if ('params' != $this->tree->root()->nodeAt($idx)->getName())
         continue;
@@ -136,10 +136,10 @@ class XmlRpcMessage extends \lang\Object implements AbstractRpcMessage {
     $encoder= new XmlRpcEncoder();
     
     $this->tree->root()->addChild(new Node('fault'))
-      ->addChild($encoder->encode(array(
+      ->addChild($encoder->encode([
         'faultCode'   => $faultcode,
         'faultString' => $faultstring
-    )));
+    ]));
   }
   
   /**

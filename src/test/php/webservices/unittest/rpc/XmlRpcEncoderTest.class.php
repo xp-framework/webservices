@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\rpc;
 
+use lang\IllegalArgumentException;
 use xml\Tree;
 use webservices\xmlrpc\XmlRpcEncoder;
 
@@ -110,7 +111,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function emptyArray() {
-    $this->assertEquals('<value><array><data></data></array></value>', $this->encode(array()));
+    $this->assertEquals('<value><array><data></data></array></value>', $this->encode([]));
   }
 
   /**
@@ -128,7 +129,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
         </array>
       </value>
       ',
-      $this->encode(array(1))
+      $this->encode([1])
     );
   }
 
@@ -151,7 +152,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
         </array>
       </value>
       ',
-      $this->encode(array(12, 'Egypt', false, -31))
+      $this->encode([12, 'Egypt', false, -31])
     );
   }
 
@@ -176,7 +177,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
         </struct>
       </value>
       ', 
-      $this->encode(array('lowerBound' => 18, 'upperBound' => 139))
+      $this->encode(['lowerBound' => 18, 'upperBound' => 139])
     );
   }
 
@@ -243,7 +244,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
    * Test encoding unsupported types will raise an exception.
    *
    */
-  #[@test, @expect('lang.IllegalArgumentException')]
+  #[@test, @expect(IllegalArgumentException::class)]
   public function unsupported() {
     $this->encode(STDIN);
   }

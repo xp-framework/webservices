@@ -43,11 +43,11 @@ class JsonResponseMessage extends JsonMessage {
    * @param   var data
    */
   public function setData($data) {
-    $this->data= array(
+    $this->data= [
       'result'  => $data,
       'error'   => null,
       'id'      => $this->id
-    );
+    ];
   }
   
   /**
@@ -66,13 +66,13 @@ class JsonResponseMessage extends JsonMessage {
    * @param   string faultString
    */
   public function setFault($faultCode, $faultString) {
-    $this->data= array(
+    $this->data= [
       'result'  => false,
-      'error'   => array(
+      'error'   => [
         'faultCode'   => $faultCode,
         'faultString' => $faultString
-      ),
+      ],
       'id'      => $this->id
-    );
+    ];
   }    
 }

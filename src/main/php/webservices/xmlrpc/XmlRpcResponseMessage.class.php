@@ -62,7 +62,7 @@ class XmlRpcResponseMessage extends XmlRpcMessage {
    * @return  var
    */
   public function getData() {
-    $ret= array();
+    $ret= [];
     
     if (
       !is('xml.Node', $this->tree->root()->nodeAt(0)->nodeAt(0)->nodeAt(0)) ||

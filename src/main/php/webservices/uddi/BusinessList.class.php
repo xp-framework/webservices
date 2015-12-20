@@ -12,7 +12,7 @@ class BusinessList extends \lang\Object {
   public 
     $operator  = '',
     $truncated = false,
-    $items     = array();
+    $items     = [];
 
   /**
    * Set Operator

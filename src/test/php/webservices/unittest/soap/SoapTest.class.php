@@ -36,7 +36,7 @@ class SoapTest extends TestCase {
     $this->assertEquals('testSerialization', $msg->method);
     $this->assertEquals('SOAP-ENV:Envelope', $msg->root()->getName());
     $this->assertNotEquals(0, sizeof($msg->root()->getAttributes()));
-    $msg->setData(array(
+    $msg->setData([
       'int'       => 1,
       'float'     => 6.1,
       'string'    => 'Binford',
@@ -44,12 +44,12 @@ class SoapTest extends TestCase {
       'bool'      => true,
       'date'      => new \util\Date('1977-12-14 11:55AM Europe/Berlin'),
       'null'      => null,
-      'array'     => array(2, 3),
-      'hash'      => array(
+      'array'     => [2, 3],
+      'hash'      => [
         'class'     => 'Test',
         'method'    => 'testSerialization'
-      )
-    ));
+      ]
+    ]);
     
     // Let's be somewhat forgiving on whitespace
     $src= trim(chop($msg->getSource(0)));

@@ -11,7 +11,7 @@ class DummyRpcTransport extends \webservices\xmlrpc\transport\XmlRpcHttpTranspor
    * @param   string $url
    * @param   [:string] $headers default array
    */
-  public function __construct($url, $headers= array()) {
+  public function __construct($url, $headers= []) {
     $this->_conn= new DummyHttpConnection($url);
     $this->_headers= $headers;
   }

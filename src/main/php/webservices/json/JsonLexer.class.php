@@ -12,11 +12,11 @@ class JsonLexer extends AbstractLexer {
 
   // Keywords used in JSON
   protected static
-    $keywords  = array(
+    $keywords  = [
       'true'   => JsonParser::T_TRUE,
       'false'  => JsonParser::T_FALSE,
       'null'   => JsonParser::T_NULL,
-    );
+    ];
 
   const
     DELIMITERS        = "{}: \n\r\t[],\"\0",      // Default delimiters
@@ -37,7 +37,7 @@ class JsonLexer extends AbstractLexer {
     $this->tokenizer= $source;
     $this->tokenizer->delimiters= self::DELIMITERS;
     $this->tokenizer->returnDelims= true;
-    $this->position= array(1, 1);   // Y, X. Current postition. Used for debugging.
+    $this->position= [1, 1];   // Y, X. Current postition. Used for debugging.
   }
 
   /**

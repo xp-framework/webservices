@@ -29,7 +29,7 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
     $timeout  = null;
   
   protected
-    $map      = array();
+    $map      = [];
 
   /**
    * Constructor
@@ -41,7 +41,7 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
     $this->endpoint= new URL($endpoint);
     $this->uri= $uri;
     $this->wsdl= false;
-    $this->map= array();
+    $this->map= [];
   }
 
   /**
@@ -244,12 +244,12 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
     $args= func_get_args();
     $method= array_shift($args);
     
-    $options= array(
+    $options= [
       'encoding'    => $this->getEncoding(),
       'exceptions'  => 0,
       'trace'       => ($this->cat != null),
       'user_agent'  => 'XP-Framework/'.get_class($this)
-    );
+    ];
 
     if (null !== $this->ctimeout) {
       $options['connection_timeout']= $this->ctimeout;

@@ -17,15 +17,15 @@ class SOAPHashMap extends \lang\Object implements SoapType {
    * @param   array params
    */
   public function __construct($params) {
-    $this->item= new XPSoapNode('hash', null, array(
+    $this->item= new XPSoapNode('hash', null, [
       'xmlns:hash'  => 'http://xml.apache.org/xml-soap',
       'xsi:type'    => 'hash:Map'
-    ));
+    ]);
     foreach ($params as $key => $value) {
-      $this->item->addChild(XPSoapNode::fromArray(array(
+      $this->item->addChild(XPSoapNode::fromArray([
         'key'   => $key,
         'value' => $value
-      ), 'item'));
+      ], 'item'));
     }
   }
   

@@ -45,9 +45,9 @@ class XmlRpcDecoder extends \lang\Object {
     $c= $node->nodeAt(0);
     switch ($c->getName()) {
       case 'struct':
-        $ret= array();
+        $ret= [];
         foreach ($c->getChildren() as $child) {
-          $data= array();
+          $data= [];
           $data[$child->nodeAt(0)->getName()]= $child->nodeAt(0);
           $data[$child->nodeAt(1)->getName()]= $child->nodeAt(1);
           $ret[$data['name']->getContent()]= $this->_unmarshall($data['value']);
@@ -69,7 +69,7 @@ class XmlRpcDecoder extends \lang\Object {
         return $instance;
         
       case 'array':
-        $ret= array();
+        $ret= [];
         foreach ($c->nodeAt(0)->getChildren() as $child) {
           $ret[]= $this->_unmarshall($child);
         }

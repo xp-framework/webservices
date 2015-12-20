@@ -9,7 +9,7 @@
  */
 class Business extends \lang\Object {
   public
-    $names        = array(),
+    $names        = [],
     $description  = '',
     $businessKey  = '';
 

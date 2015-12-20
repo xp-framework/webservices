@@ -8,7 +8,7 @@ use lang\Type;
  */
 abstract class SoapTypeMapper extends \lang\Object {
   protected
-    $handler= array(
+    $handler= [
       'webservices\\soap\\Parameter' => 'boxParameter',
       'SoapType'                     => 'boxSoapType',
       'lang\\types\\String'          => 'boxString',
@@ -20,7 +20,7 @@ abstract class SoapTypeMapper extends \lang\Object {
       'lang\\types\\Bytes'           => 'boxBytes',
       'lang\\types\\Character'       => 'boxCharacter',
       'util\\Date'                   => 'boxDate'
-    );
+    ];
 
   /**
    * Check if type of object is supported

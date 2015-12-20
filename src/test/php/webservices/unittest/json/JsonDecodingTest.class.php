@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\json;
 
+use webservices\json\JsonException;
 use unittest\TestCase;
 use util\Date;
 use webservices\json\JsonDecoder;
@@ -468,7 +469,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function decodeEmptyArray() {
-    $this->assertEquals(array(), $this->decode('[]'));
+    $this->assertEquals([], $this->decode('[]'));
   }
   
   /**
@@ -477,7 +478,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function decodeEmptyArrayWithWhitespace() {
-    $this->assertEquals(array(), $this->decode('[ ]'));
+    $this->assertEquals([], $this->decode('[ ]'));
   }
 
   /**
@@ -487,7 +488,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeSimpleNumericArray() {
     $this->assertEquals(
-      array(1, 2, 3),
+      [1, 2, 3],
       $this->decode('[ 1 , 2 , 3 ]')
     );
   }
@@ -499,7 +500,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeStringArray() {
     $this->assertEquals(
-      array('foo', 'bar'),
+      ['foo', 'bar'],
       $this->decode('[ "foo" , "bar" ]')
     );
   }
@@ -511,7 +512,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeArray() {
     $this->assertEquals(
-      array(true, false, null),
+      [true, false, null],
       $this->decode('[ true , false, null ]')
     );
   }
@@ -523,7 +524,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeSimpleMixedArray() {
     $this->assertEquals(
-      array('foo', 2, 'bar'),
+      ['foo', 2, 'bar'],
       $this->decode('[ "foo" , 2 , "bar" ]')
     );
   }
@@ -535,7 +536,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeNormalMixedArray() {
     $this->assertEquals(
-      array('foo', 0.001, false, array(1, 2, 3)),
+      ['foo', 0.001, false, [1, 2, 3]],
       $this->decode('[ "foo" , 0.001 , false , [ 1 , 2 , 3 ] ]')
     );
   }
@@ -547,7 +548,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeHashmap() {
     $this->assertEquals(
-      array('foo' => 'bar', 'bar' => 'baz'),
+      ['foo' => 'bar', 'bar' => 'baz'],
       $this->decode('{ "foo" : "bar", "bar" : "baz" }')
     );
   }
@@ -560,7 +561,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeHashmapWithEmptyKey() {
     $this->assertEquals(
-      array('' => 'empty'),
+      ['' => 'empty'],
       $this->decode('{ "" : "empty" }')
     );
   }
@@ -572,7 +573,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeObjectArray() {
     $this->assertEquals(
-      array(array('foo' => 1), array('bar' => 'baz')),
+      [['foo' => 1], ['bar' => 'baz']],
       $this->decode('[ { "foo" : 1 } , { "bar" : "baz" } ]')
     );
   }
@@ -584,7 +585,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeComplexMixedArray() {
     $this->assertEquals(
-      array('foo', true, array('foo' => 'bar', 'bar' => 2)),
+      ['foo', true, ['foo' => 'bar', 'bar' => 2]],
       $this->decode('[ "foo" , true , { "foo" : "bar" , "bar" : 2 } ]')
     );
   }
@@ -596,7 +597,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeNestedObject() {
     $this->assertEquals(
-      array('ref' => array('foo' => 'bar')),
+      ['ref' => ['foo' => 'bar']],
       $this->decode('{ "ref" : { "foo" : "bar" } }')
     );
   }
@@ -608,14 +609,14 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeComplexHashmap() {
     $this->assertEquals(
-      array(
+      [
         'foo' => 'bar',
         3 => 0.123,
         false,
-        "array" => array(1, "foo", false),
-        "array2" => array("foo" => true, "bar" => 4),
-        "array3" => array("foo" => array("foo" => "bar"))
-      ),
+        "array" => [1, "foo", false],
+        "array2" => ["foo" => true, "bar" => 4],
+        "array3" => ["foo" => ["foo" => "bar"]]
+      ],
       $this->decode(
         '{ "foo" : "bar" , "3" : 0.123 , "4" : false , "array" : [ 1 , "foo" , false ] , '.
         '"array2" : { "foo" : true , "bar" : 4 } , "array3" : { "foo" : { "foo" : "bar" } } }'
@@ -627,7 +628,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidNumber1() {
       $this->decode('0.00.1');
   }
@@ -636,7 +637,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidNumber2() {
     $this->decode('010');
   }
@@ -645,7 +646,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidNumber3() {
     $this->decode('0-10');
   }
@@ -654,7 +655,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString1() {
     $this->decode('"foo');
   }
@@ -663,7 +664,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString2() {
     $this->decode('foo"');
   }
@@ -672,7 +673,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString3() {
     $this->decode('"foo"bar"');
   }
@@ -681,7 +682,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString4() {
     $this->decode('foo');
   }
@@ -690,7 +691,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidArray1() {
     $this->decode('1 , 2 , 3');
   }
@@ -699,7 +700,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidArray2() {
     $this->decode('[ 1 2 3 ]');
   }
@@ -708,7 +709,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidArray3() {
     $this->decode('[ 1 , 2 , 3');
   }
@@ -717,7 +718,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidArray4() {
     $this->decode('1 , 2 , 3 ]');
   }
@@ -726,7 +727,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject1() {
     $this->decode('{ "foo" "bar" }');
   }
@@ -735,7 +736,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject2() {
     $this->decode('{ 1 : "bar" }');
   }
@@ -744,7 +745,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject3() {
     $this->decode('{ foo : "bar" }');
   }
@@ -753,7 +754,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject4() {
     $this->decode('{ "foo" : bar }');
   }
@@ -762,7 +763,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject5() {
     $this->decode('"foo" : "bar"');
   }
@@ -771,7 +772,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject6() {
     $this->decode('"foo" : "bar" }');
   }
@@ -780,7 +781,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject7() {
     $this->decode('{ "foo" : "bar"');
   }
@@ -789,7 +790,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test exception
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidObject8() {
     $this->decode('{ "foo" : "bar" "bar" : "foo" }');
   }
@@ -798,7 +799,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Decoding non-json data should result in an exception
    *
    */
-  #[@test,@expect('webservices.json.JsonException')]
+  #[@test,@expect(JsonException::class)]
   public function decodeInvalidData() {
     $this->decode('<xml version="1.0"?><document/>');
   }
@@ -807,7 +808,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test invalid string
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString5() {
     $this->decode('"foobar\"');
   }
@@ -816,7 +817,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test invalid string
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString6() {
     $this->decode('"foo\u20A"');
   }
@@ -825,7 +826,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test invalid string
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString7() {
     $this->decode('"foo\ufoobar"');
   }
@@ -858,7 +859,7 @@ abstract class JsonDecodingTest extends TestCase {
    * Test invalid string
    *
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeInvalidString8() {
     $this->decode('"foo\obar"');
   }
@@ -870,7 +871,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function objectKeyTreatedAsIso88591() {
     $this->assertEquals(
-      array('über' => 'coder'),
+      ['über' => 'coder'],
       $this->decode('{ "\u00FCber" : "coder" }')
     );
   }
@@ -882,7 +883,7 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeObjectWithIdenticalKeys() {
     $this->assertEquals(
-      array('foo' => 'bar'),
+      ['foo' => 'bar'],
       $this->decode('{ "foo" : "bar", "foo" : "bar2" }')
     );
   }
@@ -910,7 +911,7 @@ abstract class JsonDecodingTest extends TestCase {
    *
    * @see   https://bugs.php.net/bug.php?id=54484
    */
-  #[@test, @expect('webservices.json.JsonException')]
+  #[@test, @expect(JsonException::class)]
   public function decodeEmptyInput() {
     $this->decode('');
   }
@@ -922,7 +923,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function oneTrailingWhitespace() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode('{ "Hello": "World!" } '));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode('{ "Hello": "World!" } '));
   }
 
   /**
@@ -931,7 +932,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function twoTrailingWhitespaces() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode('{ "Hello": "World!" }  '));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode('{ "Hello": "World!" }  '));
   }
 
   /**
@@ -940,7 +941,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function trailingWhitespacesAndNewLines() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode("{ \"Hello\": \"World!\" } \r\n "));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode("{ \"Hello\": \"World!\" } \r\n "));
   }
 
   /**
@@ -949,7 +950,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function oneLeadingWhitespace() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode(' { "Hello": "World!" }'));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode(' { "Hello": "World!" }'));
   }
 
   /**
@@ -958,7 +959,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function twoLeadingWhitespaces() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode('  { "Hello": "World!" }'));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode('  { "Hello": "World!" }'));
   }
 
   /**
@@ -967,7 +968,7 @@ abstract class JsonDecodingTest extends TestCase {
    */
   #[@test]
   public function leadingWhitespacesAndNewLines() {
-    $this->assertEquals(array('Hello' => 'World!'), $this->decode(" \r\n { \"Hello\": \"World!\" }"));
+    $this->assertEquals(['Hello' => 'World!'], $this->decode(" \r\n { \"Hello\": \"World!\" }"));
   }
 
   /**
@@ -977,11 +978,11 @@ abstract class JsonDecodingTest extends TestCase {
   #[@test]
   public function decodeHumanReadableJSON() {
     $this->assertEquals(
-      array(
+      [
         'color' => 'green',
-        'sizes' => array('S', 'M', 'L', 'XL'),
+        'sizes' => ['S', 'M', 'L', 'XL'],
         'price' => 12.99
-      ),
+      ],
       $this->decode('{
         "color" : "green",
         "sizes" : [ "S", "M", "L", "XL" ],

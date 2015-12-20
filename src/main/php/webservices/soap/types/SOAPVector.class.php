@@ -19,10 +19,10 @@ class SOAPVector extends \lang\Object implements SoapType {
    */
   public function __construct($params) {
     $this->_vector= $params;
-    $this->item= new XPSoapNode('vec', null, array(
+    $this->item= new XPSoapNode('vec', null, [
       'xmlns:vec'   => 'http://xml.apache.org/xml-soap',
       'xsi:type'    => 'vec:Vector'
-    ));
+    ]);
   }
   
   /**

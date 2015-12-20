@@ -29,7 +29,7 @@
  */
 class SoapDriver extends \lang\Object {
   public
-    $drivers    = array();
+    $drivers    = [];
   
   const
     XP          = 'SOAPXP',
@@ -43,16 +43,16 @@ class SoapDriver extends \lang\Object {
    *
    */
   public function __construct() {
-    $this->drivers[self::XP]= array(
+    $this->drivers[self::XP]= [
       'fqcn'  => 'webservices.soap.xp.XPSoapClient',
       'wsdl'  => false
-    );
+    ];
     
     if (extension_loaded('soap')) {
-      $this->drivers[self::NATIVE]= array(
+      $this->drivers[self::NATIVE]= [
         'fqcn'  => 'webservices.soap.native.NativeSoapClient',
         'wsdl'  => true
-      );
+      ];
     }
   }
   
@@ -80,10 +80,10 @@ class SoapDriver extends \lang\Object {
   public function registerDriver($fqcn, $supportsWsdl) {
     static $nr= 0;
     
-    $this->drivers['SOAPRUNTIME'.$nr]= array(
+    $this->drivers['SOAPRUNTIME'.$nr]= [
       'fqcn'  => $fqcn,
       'wsdl'  => $supportsWsdl
-    );
+    ];
     
     return 'SOAPRUNTIME'.$nr++;
   }
