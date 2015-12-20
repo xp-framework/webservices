@@ -3,7 +3,6 @@
 use unittest\TestCase;
 use webservices\soap\xp\XPSoapMessage;
 
-
 /**
  * Test SOAP api
  *

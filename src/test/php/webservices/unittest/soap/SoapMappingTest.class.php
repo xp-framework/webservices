@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\soap;
 
+use webservices\unittest\soap\SoapMappingTestTarget;
 use webservices\soap\xp\XPSoapClient;
 use unittest\TestCase;
 
@@ -38,7 +39,7 @@ class SoapMappingTest extends TestCase {
     );
     
     $res= $client->invoke('test');
-    $this->assertInstanceOf('webservices.unittest.soap.SoapMappingTestTarget', $res);
+    $this->assertInstanceOf(SoapMappingTestTarget::class, $res);
     $this->assertEquals('Test-String', $res->getString());
     $this->assertEquals(12345, $res->getInteger());
   }

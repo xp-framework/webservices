@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\json;
 
+use lang\Object;
 use unittest\TestCase;
 use util\Date;
 use webservices\json\JsonDecoder;
@@ -281,7 +282,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObject() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', [], '{
+      $this->encode(newinstance(Object::class, [], '{
         public $prop= "prop";
       }'))
     );
@@ -291,7 +292,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObjectWithPrivateProperty() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', [], '{
+      $this->encode(newinstance(Object::class, [], '{
         public $prop= "prop";
         private $priv= "priv";
       }'))
@@ -302,7 +303,7 @@ class JsonEncodingTest extends TestCase {
   public function encodeObjectWithProtectedProperty() {
     $this->assertEquals(
       '{ "prop" : "prop" , "__id" : null }',
-      $this->encode(newinstance('lang.Object', [], '{
+      $this->encode(newinstance(Object::class, [], '{
         public $prop= "prop";
         protected $prot= "prot";
       }'))

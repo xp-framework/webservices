@@ -1,5 +1,6 @@
 <?php namespace webservices\unittest\rpc;
 
+use webservices\unittest\rpc\ValueObject;
 use lang\IllegalArgumentException;
 use xml\Tree;
 use webservices\xmlrpc\XmlRpcDecoder;
@@ -206,7 +207,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
+    $this->assertInstanceOf(ValueObject::class, $vo);
     $this->assertEquals('Timm', $vo->getName());
     $this->assertEquals(30, $vo->getAge());
     $this->assertEquals(true, $vo->isNew());
@@ -234,7 +235,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
+    $this->assertInstanceOf(ValueObject::class, $vo);
     $this->assertEquals('Timm', $vo->getName());
     $this->assertEquals(0, $vo->getAge());
     $this->assertEquals(true, $vo->isNew());
@@ -258,7 +259,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
+    $this->assertInstanceOf(ValueObject::class, $vo);
     $this->assertFalse(property_exists($vo, 'Power'));
   }
 
@@ -280,7 +281,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
         </member>
       </struct>
     ');
-    $this->assertInstanceOf('webservices.unittest.rpc.ValueObject', $vo);
+    $this->assertInstanceOf(ValueObject::class, $vo);
     $this->assertNull($vo->getClass()->getField('cache')->get(null));
   }
 
