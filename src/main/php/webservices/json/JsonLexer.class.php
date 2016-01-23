@@ -9,6 +9,7 @@ use text\parser\generic\AbstractLexer;
  *
  */
 class JsonLexer extends AbstractLexer {
+  public $fileName;
 
   // Keywords used in JSON
   protected static

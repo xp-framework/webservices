@@ -12,7 +12,7 @@ class DummyRpcImplementationHandler extends \lang\Object {
    */
   #[@webmethod]
   public function getImplementationName() {
-    return $this->getClassName();
+    return nameof($this);
   }
   
   /**

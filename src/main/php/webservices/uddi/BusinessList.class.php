@@ -78,7 +78,7 @@ class BusinessList extends \lang\Object {
     $s= sizeof($this->items);
     $r= sprintf(
       "%s (operator='%s',#items=%d,truncated=%s)@{\n",
-      $this->getClassName(),
+      nameof($this),
       $this->operator,
       $s,
       var_export($this->truncated, 1)

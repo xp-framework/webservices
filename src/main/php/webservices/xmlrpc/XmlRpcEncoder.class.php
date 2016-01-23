@@ -55,7 +55,7 @@ class XmlRpcEncoder extends \lang\Object {
       $n= $value->addChild(new Node('struct'));
       $n->addChild(Node::fromArray([
         'name'  => '__xp_class',
-        'value' => ['string' => $data->getClassName()]
+        'value' => ['string' => nameof($data)]
       ], 'member'));
       
       foreach ($data->getClass()->getFields() as $field) {

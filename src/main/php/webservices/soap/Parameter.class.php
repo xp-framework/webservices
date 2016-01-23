@@ -29,7 +29,7 @@ class Parameter extends \lang\Object {
   public function toString() {
     return sprintf(
       '%s@(%s) {%s}',
-      $this->getClassName(),
+      nameof($this),
       $this->name,
       ($this->value instanceof \lang\Generic 
         ? $this->value->toString() 

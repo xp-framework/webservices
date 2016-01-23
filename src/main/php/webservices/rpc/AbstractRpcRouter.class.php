@@ -110,8 +110,8 @@ abstract class AbstractRpcRouter extends HttpScriptlet implements Traceable {
       $hasFault= true;
       
       // Log exception
-      Logger::getInstance()->getCategory($this->getClassName())->error(
-        $this->getClassName(),
+      Logger::getInstance()->getCategory(nameof($this))->error(
+        nameof($this),
         '~ invocation returned exception',
         $e
       );
@@ -137,8 +137,8 @@ abstract class AbstractRpcRouter extends HttpScriptlet implements Traceable {
       }
     } catch (\lang\XPException $e) {
       // Log exception
-      Logger::getInstance()->getCategory($this->getClassName())->error(
-        $this->getClassName(),
+      Logger::getInstance()->getCategory(nameof($this))->error(
+        nameof($this),
         '~ invocation returned exception',
         $e
       );

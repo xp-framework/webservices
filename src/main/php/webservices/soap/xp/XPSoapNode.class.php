@@ -211,7 +211,7 @@ class XPSoapNode extends Node {
     
     if ($value instanceof \lang\Generic) {     // XP objects
       $child->setAttribute('xmlns:xp', 'http://xp-framework.net/xmlns/xp');
-      $child->setAttribute('xsi:type', 'xp:'.$value->getClassName());
+      $child->setAttribute('xsi:type', 'xp:'.nameof($value));
       $this->_recurse($child, get_object_vars($value), $mapping);
       return;
     }

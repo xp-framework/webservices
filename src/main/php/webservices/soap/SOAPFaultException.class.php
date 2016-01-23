@@ -40,7 +40,7 @@ class SOAPFaultException extends \lang\XPException {
       "  fault.faultactor  = '%s'\n".
       "  fault.detail      = %s\n".
       "}\n",
-      $this->getClassName(),
+      nameof($this),
       $this->message,
       $this->fault->faultcode,
       $this->fault->faultactor,

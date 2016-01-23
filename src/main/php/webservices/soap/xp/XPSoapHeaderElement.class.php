@@ -148,7 +148,7 @@ class XPSoapHeaderElement extends \lang\Object implements XPSoapHeader {
    * @return  string
    */
   public function toString() {
-    $s= $this->getClassName().'@('.$this->hashCode()."){\n";
+    $s= nameof($this).'@('.$this->hashCode()."){\n";
     $s.= '  [           name ] '.$this->name."\n";
     $s.= '  [          value ] '.$this->value."\n";
     $s.= '  [ mustUnderstand ] '.\xp::stringOf($this->mustUnderstand)."\n";

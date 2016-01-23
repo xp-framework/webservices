@@ -39,7 +39,7 @@ class JsonRpcHttpTransport extends AbstractRpcTransport {
    * @return  string
    */
   public function toString() {
-    return sprintf('%s { %s }', $this->getClassName(), $this->_conn->request->url->_info['url']);
+    return sprintf('%s { %s }', nameof($this), $this->_conn->request->url->_info['url']);
   }
   
   /**

@@ -118,7 +118,7 @@ class SOAPHTTPTransport extends AbstractRpcTransport {
    * @return  string
    */
   public function toString() {
-    return $this->getClassName().'('.\xp::stringOf($this->_conn).')';
+    return nameof($this).'('.\xp::stringOf($this->_conn).')';
   }
 
   /**

@@ -36,7 +36,7 @@ class RpcFaultException extends \lang\XPException {
       "  fault.faultcode   = %s\n".
       "  fault.faultstring = '%s'\n".
       "}\n",
-      $this->getClassName(),
+      nameof($this),
       $this->message,
       $this->fault->faultCode,
       $this->fault->faultString
