@@ -3,6 +3,11 @@ Webservices for XP Framework ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 6.3.2 / 2016-01-24
+
+* Fix code to handle baseless objects correctly. See xp-framework/rfc#297
+  (@thekid)
+
 ## 6.3.1 / 2016-01-24
 
 * Fix code to use `nameof()` instead of the deprecated `getClassName()`
