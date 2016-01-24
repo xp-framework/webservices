@@ -311,10 +311,13 @@ class JsonEncodingTest extends TestCase {
   }
 
   #[@test]
-  public function encodeDateObject() {
+  public function encodeObjectWithSleepMethod() {
     $this->assertEquals(
-      '{ "value" : "2009-05-18 01:02:03+0200" , "__id" : null }',
-      $this->encode(new Date('2009-05-18 01:02:03'))
+      '{ "prop" : "val" }',
+      $this->encode(newinstance(Object::class, [], '{
+        public $prop= "val";
+        public function __sleep() { return ["prop"]; }
+      }'))
     );
   }
 

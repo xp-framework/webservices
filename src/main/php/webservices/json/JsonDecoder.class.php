@@ -215,20 +215,15 @@ class JsonDecoder extends \lang\Object implements IJsonDecoder {
           break;
         }
 
-        if ($data instanceof \lang\Generic) {
-        
-          if (!method_exists($data, '__sleep')) {
-            $vars= get_object_vars($data);
-          } else {
-            $vars= [];
-            foreach ($data->__sleep() as $var) $vars[$var]= $data->{$var};
-          }
-          
-          $this->encodeTo($vars, $stream);
-          return true;
+        if (!method_exists($data, '__sleep')) {
+          $vars= get_object_vars($data);
+        } else {
+          $vars= [];
+          foreach ($data->__sleep() as $var) $vars[$var]= $data->{$var};
         }
         
-        // Break missing intentially
+        $this->encodeTo($vars, $stream);
+        return true;
       }
       
       default: {
