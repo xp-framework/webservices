@@ -1,5 +1,8 @@
 %{
-namespace xp\compiler\syntax\xp;
+namespace webservices\json;
+
+use util\Bytes;
+use lang\FormatException;
 %}
 
 %token T_TRUE  261 /* used in lexer */
@@ -30,7 +33,7 @@ expression:
 
 object:
       '{' objectcontent '}' { $$= $2; }
-    | '{' '}'               { $$= array(); }
+    | '{' '}'               { $$= []; }
 ;
 
 objectcontent:
@@ -39,29 +42,29 @@ objectcontent:
 ;
 
 objectpart:
-      objectkey ':' expression { $$= array($1 => $3); }
+      objectkey ':' expression { $$= [$1 => $3]; }
 ;
 
 objectkey:
-    '"' word '"' { $$= iconv($this->targetEncoding, xp::ENCODING, $2); }
+    '"' word '"' { $$= iconv($this->targetEncoding, \xp::ENCODING, $2); }
   | '"' '"' { $$= ''; }
 ;    
 
 array:
       '[' arraycontent ']' { $$= $2; }
-    | '[' ']'              { $$= array(); }
+    | '[' ']'              { $$= []; }
 ;
 
 arraycontent:
-    expression                  { $$= array($1); }
-  | arraycontent ',' expression { $$= array_merge($1, array($3)); }
+    expression                  { $$= [$1]; }
+  | arraycontent ',' expression { $$= array_merge($1, [$3]); }
 ;
 
 string:
     '"' word '"' {
-      if (xp::errorAt(__FILE__)) {
-        $e= new FormatException('Cannot decode string '.create(new Bytes($1))->toString().' to '.$this->targetEncoding);
-        xp::gc(__FILE__);
+      if (\xp::errorAt(__FILE__)) {
+        $e= new FormatException('Cannot decode string '.(new Bytes($1))->toString().' to '.$this->targetEncoding);
+        \xp::gc(__FILE__);
         throw $e;
       }
       $$= $2;
@@ -102,7 +105,7 @@ atom:
 ;
 %%
 
-  protected $targetEncoding= xp::ENCODING;
+  protected $targetEncoding= \xp::ENCODING;
 
   /**
    * Set target encoding. The target encoding is the string encoding that all
