@@ -4,6 +4,7 @@ use webservices\unittest\rpc\ValueObject;
 use lang\IllegalArgumentException;
 use xml\Tree;
 use webservices\xmlrpc\XmlRpcDecoder;
+use util\Bytes;
 
 /**
  * TestCase
@@ -304,7 +305,7 @@ class XmlRpcDecoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function base64() {
-    $this->assertEquals(new \lang\types\Bytes('Unittest'), $this->decode('<base64>VW5pdHRlc3Q=</base64>'));
+    $this->assertEquals(new Bytes('Unittest'), $this->decode('<base64>VW5pdHRlc3Q=</base64>'));
   }
  
   /**

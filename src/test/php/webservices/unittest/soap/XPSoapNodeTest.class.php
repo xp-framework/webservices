@@ -55,14 +55,6 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function stringType() {
-    $this->assertEquals(
-      new XPSoapNode('item', 'my string', ['xsi:type' => 'xsd:string']),
-      $this->node(new \lang\types\String('my string'))
-    );
-  }
-
   #[@test]
   public function simpleInteger() {
     $this->assertEquals(
@@ -71,27 +63,11 @@ class XPSoapNodeTest extends TestCase {
     );
   }
 
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function integerType() {
-    $this->assertEquals(
-      new XPSoapNode('item', 12345, ['xsi:type' => 'xsd:int']),
-      $this->node(new \lang\types\Integer(12345))
-    );
-  }
-
   #[@test]
   public function soapLong() {
     $this->assertEquals(
       new XPSoapNode('item', '12345', ['xsi:type' => 'xsd:long']),
       $this->node(new SOAPLong(12345))
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function longType() {
-    $this->assertEquals(
-      new XPSoapNode('item', '12345', ['xsi:type' => 'xsd:long']),
-      $this->node(new \lang\types\Long(12345))
     );
   }
 
@@ -112,26 +88,10 @@ class XPSoapNodeTest extends TestCase {
   }
 
   #[@test]
-  public function booleanType() {
-    $this->assertEquals(
-      new XPSoapNode('item', 'true', ['xsi:type' => 'xsd:boolean']),
-      $this->node(new \lang\types\Boolean(true))
-    );
-  }
-
-  #[@test]
   public function simpleDouble() {
     $this->assertEquals(
       new XPSoapNode('item', 5.0, ['xsi:type' => 'xsd:float']),
       $this->node(5.0)
-    );
-  }
-
-  #[@test]
-  public function doubleType() {
-    $this->assertEquals(
-      new XPSoapNode('item', '5', ['xsi:type' => 'xsd:double']),
-      $this->node(new \lang\types\Double(5.0))
     );
   }
 

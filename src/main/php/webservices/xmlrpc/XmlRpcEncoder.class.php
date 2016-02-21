@@ -2,7 +2,7 @@
 
 use xml\Node;
 use util\Date;
-use lang\types\Bytes;
+use util\Bytes;
 
 /**
  * Encoder for data structures into XML-RPC format
@@ -47,7 +47,7 @@ class XmlRpcEncoder extends \lang\Object {
     if ($data instanceof Date) {
       $value->addChild(new Node('dateTime.iso8601', $data->toString('Ymd\TH:i:s')));
       return $value;
-    } else if ($data instanceof Bytes) {
+    } else if ($data instanceof Bytes || $data instanceof \lang\types\Bytes) {
       $value->addChild(new Node('base64', base64_encode($data)));
       return $value;
     } else if ($data instanceof \lang\Generic) {

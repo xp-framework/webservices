@@ -246,38 +246,6 @@ class JsonEncodingTest extends TestCase {
     );
   }
 
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function encodeStringObject() {
-    $this->assertEquals(
-      '"foobar"',
-      $this->encode(new \lang\types\String('foobar'))
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function encodeStringObjectWithEscape() {
-    $this->assertEquals(
-      '"foobar\n"',
-      $this->encode(new \lang\types\String("foobar\n"))
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function encodeStringObjectWithUmlat() {
-    $this->assertEquals(
-      '"E\u00fcro"',
-      $this->encode(new \lang\types\String('Eüro'))
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function encodeStringObjectWithEuroSign() {
-    $this->assertEquals(
-      '"\u20acuro"',
-      $this->encode(new \lang\types\String("\xe2\x82\xacuro", 'utf-8'))
-    );
-  }
-
   #[@test]
   public function encodeObject() {
     $this->assertEquals(

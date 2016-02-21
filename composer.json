@@ -6,7 +6,7 @@
   "description" : "Webservices for XP Framework",
   "keywords": ["module", "xp"],
   "require" : {
-    "xp-framework/core": "^7.0 | ^6.5",
+    "xp-framework/core": "^7.0 | ^6.11",
     "xp-framework/xml": "^7.0 | ^6.3",
     "xp-framework/parser": "^7.0 | ^6.0",
     "xp-framework/text-tokenize": "^7.0 | ^6.6",

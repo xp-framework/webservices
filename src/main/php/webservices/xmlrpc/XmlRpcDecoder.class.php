@@ -3,7 +3,7 @@
 use xml\XMLFormatException;
 use xml\Node;
 use util\Date;
-use lang\types\Bytes;
+use util\Bytes;
 use lang\XPClass;
 
 /**

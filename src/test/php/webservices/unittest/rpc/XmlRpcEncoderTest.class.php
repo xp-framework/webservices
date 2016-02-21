@@ -3,6 +3,7 @@
 use lang\IllegalArgumentException;
 use xml\Tree;
 use webservices\xmlrpc\XmlRpcEncoder;
+use util\Bytes;
 
 /**
  * TestCase
@@ -237,7 +238,7 @@ class XmlRpcEncoderTest extends \unittest\TestCase {
    */
   #[@test]
   public function base64() {
-    $this->assertEquals('<value><base64>VW5pdHRlc3Q=</base64></value>', $this->encode(new \lang\types\Bytes('Unittest')));
+    $this->assertEquals('<value><base64>VW5pdHRlc3Q=</base64></value>', $this->encode(new Bytes('Unittest')));
   }
  
   /**
