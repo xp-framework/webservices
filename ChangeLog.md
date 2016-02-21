@@ -3,6 +3,10 @@ Webservices for XP Framework ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 7.0.0 / 2016-02-21
+
+* Added version compatibility with XP 7 - @thekid
+
 ## 6.3.2 / 2016-01-24
 
 * Fix code to handle baseless objects correctly. See xp-framework/rfc#297
