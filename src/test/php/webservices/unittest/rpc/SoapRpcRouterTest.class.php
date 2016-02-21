@@ -221,9 +221,6 @@ class SoapRpcRouterTest extends MockedRpcRouterTest {
     $this->assertEquals(200, $response->statusCode, \xp::stringOf($response->message));
     
     // $this->assertHasHeader($response->headers, 'Content-type: text/xml; charset=utf-8');
-    $this->assertStringContained(
-      new \lang\types\String('Störung in Düsseldorf', 'utf-8'),
-      new \lang\types\String($response->getContent(), 'utf-8')
-    );
+    $this->assertStringContained('Störung in Düsseldorf', $response->getContent());
   }
 }
