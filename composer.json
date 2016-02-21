@@ -9,7 +9,7 @@
     "xp-framework/core": "^7.0 | ^6.11",
     "xp-framework/xml": "^7.0 | ^6.3",
     "xp-framework/parser": "^7.0 | ^6.0",
-    "xp-framework/text-tokenize": "^7.0 | ^6.6",
+    "xp-framework/tokenize": "^7.0 | ^6.6",
     "xp-framework/scriptlet": "^8.0 | ^6.2",
     "php" : ">=5.5.0"
   },
