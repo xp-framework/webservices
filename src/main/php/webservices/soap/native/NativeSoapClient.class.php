@@ -275,7 +275,7 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
     $this->location && $options['location']= $this->location;
 
     if ($this->wsdl) {
-      $client= new SoapClient($this->endpoint->getURL(), $options);
+      $client= new \SoapClient($this->endpoint->getURL(), $options);
     } else {
 
       // Do not overwrite location if already set from outside
@@ -290,7 +290,7 @@ class NativeSoapClient extends \lang\Object implements ISoapClient, Traceable {
       $options['style']= $this->getStyle();
       $options['use']= $this->getSoapEncoding();
       
-      $client= new SoapClient(null, $options);
+      $client= new \SoapClient(null, $options);
     }
 
     // Take care of wrapping XP SOAP types into respective ext/soap value objects
