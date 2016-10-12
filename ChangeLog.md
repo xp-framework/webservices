@@ -3,6 +3,10 @@ Webservices for XP Framework ChangeLog
 
 ## ?.?.? / ????-??-??
 
+## 7.0.1 / 2016-10-12
+
+* Fix of SoapClient namespace in webservices\soap\native\NativeSoapClient
+
 ## 7.0.0 / 2016-02-21
 
 * **Adopted semantic versioning. See xp-framework/rfc#300** - @thekid 
